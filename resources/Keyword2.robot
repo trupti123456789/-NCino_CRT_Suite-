@@ -40,7 +40,7 @@ Data
     # Add a new household relationship
     ClickText          New                         anchor=Import
     Use Modal          On
-    ClickText          Household
+    ClickText         HouseholdSelect "Household" if you're adding a Household relationship type.
     ClickText          Next
     ${unique_name}=    Generate Unique Name        ${Data["Name"]}
     TypeText           Relationship Name           ${unique_name}
