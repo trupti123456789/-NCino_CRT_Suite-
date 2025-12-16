@@ -39,5 +39,8 @@ Home
     ClickText                   Home
     VerifyTitle                 Home | Salesforce
 
+Wait
+    [Documentation]             It will pause the test case for perticular secend
+    Sleep                       5
 
     
