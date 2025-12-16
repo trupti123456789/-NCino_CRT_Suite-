@@ -51,6 +51,8 @@ DeleteRelationship
     VerifyText                  Undo
     VerifyNoText                Undo
     ClickText                   Relationships               partial_match=False
-Wait
-    [Documentation]             It will pause the test case for perticular secend
-    Sleep       
+Generate Unique Name
+    [Arguments]    ${base_name}
+    ${ts}=    Get Time    epoch
+   ${unique}=    Catenate    SEPARATOR=_    item1=${base_name}    item2=${ts}
+    [Return]    ${unique}     
