@@ -10,8 +10,6 @@ Resource                ../resources/keyword.robot
 
 
 *** Keywords ***
-
-
 Data
 
     ${Json_obj}=        Evaluate                    open('${CURDIR}/../Data/Data.json').read()    json
