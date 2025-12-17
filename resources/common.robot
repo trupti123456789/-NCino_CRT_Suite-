@@ -9,7 +9,7 @@ ${home_url}                     ${login_url}/lightning/page/home
 ${login_url}                 https://copadotestenvironment--qa.sandbox.lightning.force.com/lightning/settings/personal/AdvancedUserDetails/home
 ${Username}                     kheidt@copadoncinohub.com
 ${password}                     CopadoNcino1!
-${secret}                       QIKMG7VHQ4JJSWXRD7WULZHV23ZZFPDT
+
 
 
 *** Keywords ***
