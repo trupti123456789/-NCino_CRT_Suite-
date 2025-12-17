@@ -12,6 +12,8 @@ ${password}                     CopadoNcino1!
 
 
 
+
+
 *** Keywords ***
 Setup Browser   
     Set Library Search Order    QForce
@@ -25,11 +27,12 @@ Login
     [Documentation]             Login to Salesforce instance
     GoTo                        ${login_url}
     TypeText                    Username                    ${username}                 delay=1
+    sleep                       2
     TypeText                    Password                    ${password}
     ClickText                   Log In
-    ${mfa_code}=                GetOTP                      ${username}                 ${secret}
-    TypeText                    Verification Code           ${mfa_code}
-    ClickText                   Verify
+    # ${mfa_code}=                GetOTP                      ${username}                 ${secret}
+    # TypeText                    Verification Code           ${mfa_code}
+    # ClickText                   Verify
 
 Home
     [Documentation]             Navigate to homepage, login if needed
