@@ -7,7 +7,7 @@ Suite Setup                     Open Browser                about:blank         
 ${BROWSER}                      chrome
 ${home_url}                     ${login_url}/lightning/page/home
 ${login_url}                https://copadohub.my.salesforce.com/
-${Username}                     kheidt@copadoncinoenv1qa.com
+${Username}                     kheidt@copadoncinohub.com
 ${password}                     CopadoNcino1!
 
 
