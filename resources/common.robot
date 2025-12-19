@@ -47,4 +47,9 @@ Wait
     [Documentation]             It will pause the test case for perticular secend
     Sleep                       5
 
+Generate Unique Name
+    [Arguments]    ${base_name}
+    ${ts}=    Get Time    epoch
+    ${unique}=     Catenate    _    ${base_name}    ${ts}
+    [Return]    ${unique}    
     
