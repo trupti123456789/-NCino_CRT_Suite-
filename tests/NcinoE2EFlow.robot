@@ -11,7 +11,7 @@ Suite Teardown                  End Suite
 *** Test Cases ***
 E2E_flow
    ${Data}=  Data
-   Adding Relationships      ${Data}
+    Adding Relationships for Customer Onboarding     ${Data}
    
 
     
