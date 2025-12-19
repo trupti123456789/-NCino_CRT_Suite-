@@ -5,12 +5,7 @@ Resource                common.robot
 Suite Setup             Open Browser     about:blank    chrome
 
 *** Keywords ***
-Relationships
-    [Documentation]     Custom appstate to go directly to nCino / Relationships
-    Home
-    LaunchApp           Relationships
-    ClickText           Relationships
-    VerifyPageHeader    Relationships
+
 
 Loans
     [Documentation]             Custom appstate to go directly to nCino / Relationships
