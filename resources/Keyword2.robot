@@ -36,7 +36,7 @@ Data
 
  Adding Relationships for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
-    [Arguments]                 ${Data}
+    [Arguments]                ${RelationshipData}
     Home
     LaunchApp                   Relationships
     ClickText                   Relationships
