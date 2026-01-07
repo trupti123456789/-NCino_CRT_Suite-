@@ -1,5 +1,5 @@
 *** Settings ***
-Library                         QWeb
+Library                         QForce
 Library                         Collections
 Library                         RequestsLibrary
 Library                         JSONLibrary
@@ -28,18 +28,19 @@ Data
     ...                         Name1=${data2["Relationship Name"]}
     ...                         Type1=${data2["Type"]}
     ...                         Role1=${data2["Role"]}
+    ...                         Contact=${data2["Contact"]}
     ...                         Name2=${data3["Relationship Name"]}
     ...                         Type2=${data3["Type"]}
 
     [Return]                    ${RelationshipData}
 
  Adding Relationships for Customer Onboarding
-  [Documentation]      appstate to go directly to nCino / Relationships and create Onboarding
+    [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
     [Arguments]                 ${Data}
     Home
-    LaunchApp           Relationships
-    ClickText           Relationships
-    VerifyPageHeader    Relationships
+    LaunchApp                   Relationships
+    ClickText                   Relationships
+    VerifyPageHeader            Relationships
     # Add a new household relationship
     ClickText                   New                         anchor=Import
     Use Modal                   On
@@ -123,10 +124,32 @@ Data
     ClickText                   ${Household_User_name}
     ClickText                   Exposure
     VerifyText                  Connection Tree
-    
-    #Create a Contact for Bussiness Relationship
-     ClickText                   Relationships
-    ClickText                   ${Business_User_name}
 
+    #Create a Contact for Bussiness Account
+    ClickText                   Relationships
+    ClickText                   ${Business_User_name}
+    ClickText                   Contacts                    anchor=Credit Actions
+    ClickText                   New                         anchor=Refresh
+    UseModal                    ON
+    PickList                    Salutation                  Mr.
+    TypeText                    Last Name                   ${RelationshipData["Contact"]}
+    ClickCheckbox               Primary Contact             on
+    ClickText                   Save                        partial_match=False
+
+    #Verifying contact creation
+    ClickText                   ${RelationshipData["Contact"]}
+    VerifyField                 Name                        Mr.${RelationshipData["Contact"]}
+    VerifyField                 Relationship Name            ${Business_User_name}
+   VerifyCheckbox                 Primary Contact        on
+
+   #Create a Product package for Business Account
+    ClickText                   Relationships
+    ClickText                   ${Business_User_name}
+    Clicktext                   New Product Package      anchor=Edit
+    ClickText                   Save
+    ClickText                   Cancel
+   
+
+   
 
 
