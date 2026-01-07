@@ -42,7 +42,8 @@ Data
     ClickText                   Relationships
     VerifyPageHeader            Relationships
     # Add a new household relationship
-    ClickText                   New                         anchor=Import
+    VerifyText                   New 
+    ClickText                   New                         anchor=Import      partial_match=False
     Use Modal                   On
     ClickText                   HouseholdSelect "Household" if you're adding a Household relationship type.
     ClickText                   Next
@@ -54,7 +55,7 @@ Data
 
     # Add a new business relationship
     ClickText                   Relationships               partial_match=False
-    ClickText                   New                         anchor=Import
+    ClickText                   New                         anchor=Import      partial_match=False
     Run Keyword                 Wait
     Use Modal                   On
     ClickText                   BusinessSelect "Business" to add a Corporation, Partnership, or other business relationship type.
@@ -67,7 +68,7 @@ Data
 
     # Add a new individual relationship
     ClickText                   Relationships
-    ClickText                   New                         anchor=Import
+    ClickText                   New                         anchor=Import      partial_match=False
     Run Keyword                 Wait
     Use Modal                   On
     ClickText                   IndividualSelect "Individual" to add an Individual relationship type.
@@ -87,6 +88,7 @@ Data
     Use Table                   Connected Relationship
     ClickCell                   r1c1
     TypeText                    Connected Relationship      ${Household_User_name}
+    Clicktext                   Role
     Drop Down                   Role                        ${RelationshipData["Role"]}
     ClickText                   Save
     Run Keyword                 Wait
@@ -110,6 +112,7 @@ Data
     Use Table                   Connected Relationship
     ClickCell                   r1c1
     TypeText                    Connected Relationship      ${Business_User_name}
+    Clicktext                   Role
     Drop Down                   Role                        ${RelationshipData["Role1"]}
     ClickText                   Save
 
