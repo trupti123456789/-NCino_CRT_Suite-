@@ -123,5 +123,8 @@ Data
     ClickText                   ${Household_User_name}
     ClickText                   Exposure
     VerifyText                  Connection Tree
+    
+    #Create a Contact for Bussiness Relationship
+    
 
 
