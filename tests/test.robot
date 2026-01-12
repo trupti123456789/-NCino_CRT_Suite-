@@ -33,10 +33,10 @@ Data
     ...                         Type2=${data3["Type"]}
     ...                         DebtName1=${data4["Debt Name"]}
     ...                         value1=${data4["Principal Balance"]}
-    ...                         Matutitydate1=${data4["Matutitydate"]}
+    ...                         Maturitydate1=${data4["Maturity Date"]}
     ...                         DebtName2=${data5["Debt Name"]}
     ...                         value2=${data5["Principal Balance"]}
-    ...                         Matutitydate2=${data5["Matutitydate"]}
+    ...                         Maturitydate2=${data5["Maturity Date"]}
 
     [Return]                    ${RelationshipData}
 
