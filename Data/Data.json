@@ -16,10 +16,12 @@
     },
     "data1DirectDebt":{
        "Debt Name": "Direct Debt",
-       "Principal Balance":"234566"
+       "Principal Balance":234566,
+       "Maturity Date":" 02-02-2027"
     },
     "data2IndirectDebt":{
        "Debt Name": "Indirect Debt",
-       "Principal Balance":"237866"
+       "Principal Balance":237866,
+        "Maturity Date":"2-3-2027"
     }
 }
