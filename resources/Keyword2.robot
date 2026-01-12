@@ -33,9 +33,9 @@ Data
     ...                         Contact=${data2["Contact"]}
     ...                         Name2=${data3["Relationship Name"]}
     ...                         Type2=${data3["Type"]}
-     ...                        DebtName1=${data4["Debt Name"]}   
+    ...                        DebtName1=${data4["Debt Name"]}   
     ...                        value1=${data4["Principal Balance"]}
-     ...                        DebtName2=${data5["Debt Name"]}   
+    ...                        DebtName2=${data5["Debt Name"]}   
     ...                        value2=${data5["Principal Balance"]}
 
     [Return]                    ${RelationshipData}
@@ -127,9 +127,9 @@ Data
     ClickText                   Relationships
     ClickText                   ${Household_User_name}
     ClickText                   Exposure
-    ClickText                   Add Direct Debt
-    TypeText                    Debt Name                   ${DebtName1}
-    TypeText                    Principal Balance           ${value1}
+    ClickText                   Add Direct Debt            
+    TypeText                    Debt Name                  ${RelationshipData["DebtName1"]}
+    TypeText                    Principal Balance            ${RelationshipData["value1"]}
     ClickText                   Select a date
     ClickText                   Select a date
     ClickText                   31
@@ -139,8 +139,8 @@ Data
     ClickText                   6
     ClickText                   Save
     ClickText                   Add Indirect Debt
-    TypeText                    Debt Name                   ${DebtName1}
-    TypeText                    Principal Balance           ${value2}
+    TypeText                    Debt Name                    ${RelationshipData["DebtName2"]}
+    TypeText                    Principal Balance           ${RelationshipData["value2"]}
     ClickText                   Select a date
     ClickText                   Next Month
     ClickText                   28
@@ -174,7 +174,7 @@ Data
     Clicktext                   New Product Package         anchor=Edit
     ClickText                   Save
     ClickText                   Cancel
-    
+
 
 
 
