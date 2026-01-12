@@ -12,14 +12,16 @@ Resource                        ../resources/keyword.robot
 *** Keywords ***
 Data
 
-    ${Json_obj}=                Evaluate                    open('${CURDIR}/../Data/Data.json').read()    json
-    ${dataA}=                   Evaluate                    json.loads('''${Json_obj}''')       json
+    ${Json_obj}=                Evaluate                    open('${CURDIR}/../Data/Data.json').read()         json
+    ${dataA}=                   Evaluate                    json.loads('''${Json_obj}''')                      json
 
     # Extracting data for relationship object and logging the values
     ${data1}=                   Set Variable                ${dataA["data1Relationship"]}
     ${data2}=                   Set Variable                ${dataA["data2Relationship"]}
     ${data3}=                   Set Variable                ${dataA["data3Relationship"]}
-
+    ${data4}=                   Set Variable                ${dataA["data1DirectDebt"]}
+    ${data5}=                   Set Variable                ${dataA["data2IndirectDebt"]}
+            
     # Setting variables for relationship data
     ${RelationshipData}=        Create Dictionary
     ...                         Name=${data1["Relationship Name"]}
@@ -31,19 +33,24 @@ Data
     ...                         Contact=${data2["Contact"]}
     ...                         Name2=${data3["Relationship Name"]}
     ...                         Type2=${data3["Type"]}
+     ...                        DebtName1=${data4["Debt Name"]}   
+    ...                        value1=${data4["Principal Balance"]}
+     ...                        DebtName2=${data5["Debt Name"]}   
+    ...                        value2=${data5["Principal Balance"]}
 
     [Return]                    ${RelationshipData}
 
+    
  Adding Relationships for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
-    [Arguments]                ${RelationshipData}
+    [Arguments]                 ${RelationshipData}
     Home
     LaunchApp                   Relationships
     ClickText                   Relationships
     VerifyPageHeader            Relationships
     # Add a new household relationship
-    VerifyText                   New 
-    ClickText                   New                         anchor=Import      partial_match=False
+    VerifyText                  New
+    ClickText                   New                         anchor=Import               partial_match=False
     Use Modal                   On
     ClickText                   HouseholdSelect "Household" if you're adding a Household relationship type.
     ClickText                   Next
@@ -55,7 +62,7 @@ Data
 
     # Add a new business relationship
     ClickText                   Relationships               partial_match=False
-    ClickText                   New                         anchor=Import      partial_match=False
+    ClickText                   New                         anchor=Import               partial_match=False
     Run Keyword                 Wait
     Use Modal                   On
     ClickText                   BusinessSelect "Business" to add a Corporation, Partnership, or other business relationship type.
@@ -68,7 +75,7 @@ Data
 
     # Add a new individual relationship
     ClickText                   Relationships
-    ClickText                   New                         anchor=Import      partial_match=False
+    ClickText                   New                         anchor=Import               partial_match=False
     Run Keyword                 Wait
     Use Modal                   On
     ClickText                   IndividualSelect "Individual" to add an Individual relationship type.
@@ -104,29 +111,45 @@ Data
     ClickText                   Save
 
     # Create a connection for the individual relationship
+    #                           ClickText                   Relationships
+    #                           ClickText                   ${Business_User_name}
+    #                           ClickText                   Connections
+    #                           Use Modal                   On
+    #                           ClickText                   New
+    #                           Use Table                   Connected Relationship
+    #                           ClickCell                   r1c1
+    #                           TypeText                    Connected Relationship      ${Business_User_name}
+    #                           Clicktext                   Role
+    #                           Drop Down                   Role                        ${RelationshipData["Role1"]}
+    #                           ClickText                   Save
+
+    # Verify the Exposer abd create the  debts
     ClickText                   Relationships
-    ClickText                   ${Business_User_name}
-    ClickText                   Connections
-    Use Modal                   On
-    ClickText                   New
-    Use Table                   Connected Relationship
-    ClickCell                   r1c1
-    TypeText                    Connected Relationship      ${Business_User_name}
-    Clicktext                   Role
-    Drop Down                   Role                        ${RelationshipData["Role1"]}
+    ClickText                   ${Household_User_name}
+    ClickText                   Exposure
+    ClickText                   Add Direct Debt
+    TypeText                    Debt Name                   ${DebtName1}
+    TypeText                    Principal Balance           ${value1}
+    ClickText                   Select a date
+    ClickText                   Select a date
+    ClickText                   31
+    TypeText                    Maturity Date               2/2/2027
+    ClickText                   Select a date
+    ClickText                   Next Month
+    ClickText                   6
     ClickText                   Save
-
-    # Verify the relationship tree for household
-    ClickText                   Relationships
-    ClickText                   ${Household_User_name}
-    ClickText                   Exposure
-    VerifyText                  Connection Tree
-
-    # Verify the relationship tree for business
-    ClickText                   Relationships
-    ClickText                   ${Household_User_name}
-    ClickText                   Exposure
-    VerifyText                  Connection Tree
+    ClickText                   Add Indirect Debt
+    TypeText                    Debt Name                   ${DebtName1}
+    TypeText                    Principal Balance           ${value2}
+    ClickText                   Select a date
+    ClickText                   Next Month
+    ClickText                   28
+    TypeText                    Maturity Date               2/2/2027
+    ClickText                   Save
+    RefreshPage
+    VerifyText                  ${Household_User_name}
+    ClickText                   Recalculate Exposure
+    VerifyText                  Total Exposure Summary
 
     #Create a Contact for Bussiness Account
     ClickText                   Relationships
@@ -142,17 +165,18 @@ Data
     #Verifying contact creation
     ClickText                   ${RelationshipData["Contact"]}
     VerifyField                 Name                        Mr.${RelationshipData["Contact"]}
-    VerifyField                 Relationship Name            ${Business_User_name}
-   VerifyCheckbox                 Primary Contact        on
+    VerifyField                 Relationship Name           ${Business_User_name}
+    VerifyCheckbox              Primary Contact             on
 
-   #Create a Product package for Business Account
+    #Create a Product package for Business Account
     ClickText                   Relationships
     ClickText                   ${Business_User_name}
-    Clicktext                   New Product Package      anchor=Edit
+    Clicktext                   New Product Package         anchor=Edit
     ClickText                   Save
     ClickText                   Cancel
-   
+    
 
-   
+
+
 
 
