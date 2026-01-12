@@ -94,21 +94,21 @@ Data
     ClickText                   New
     Use Table                   Connected Relationship
     ClickCell                   r1c1
-    TypeText                    Connected Relationship      ${Household_User_name}
+    TypeText                    Connected Relationship       ${Business_User_name}
     Clicktext                   Role
     Drop Down                   Role                        ${RelationshipData["Role"]}
     ClickText                   Save
     Run Keyword                 Wait
 
-    # Create a connection for the business relationship
-    ClickText                   Connections
-    Use Modal                   On
-    ClickText                   New
-    Use Table                   Connected Relationship
-    ClickCell                   r1c1
-    TypeText                    Connected Relationship      ${Business_User_name}
-    Drop Down                   Role                        ${RelationshipData["Role"]}
-    ClickText                   Save
+   #  # Create a connection for the business relationship
+   #  ClickText                   Connections
+   #  Use Modal                   On
+   #  ClickText                   New
+   #  Use Table                   Connected Relationship
+   #  ClickCell                   r1c1
+   #  TypeText                    Connected Relationship      ${Business_User_name}
+   #  Drop Down                   Role                        ${RelationshipData["Role"]}
+   #  ClickText                   Save
 
     # Create a connection for the individual relationship
     #                           ClickText                   Relationships
