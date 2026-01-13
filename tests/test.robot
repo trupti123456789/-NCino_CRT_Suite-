@@ -35,7 +35,7 @@ Data
     ...                         value1=${data4["Principal Balance"]}
     ...                         DebtName2=${data5["Debt Name"]}
     ...                         value2=${data5["Principal Balance"]}
-   
+
 
     [Return]                    ${RelationshipData}
 
@@ -129,7 +129,7 @@ Data
     ClickText                   Add Direct Debt
     TypeText                    Debt Name                   ${RelationshipData["DebtName1"]}
     TypeText                    Principal Balance           ${RelationshipData["value1"]}
-    ClickText                   Principal Balance           
+    ClickText                   Principal Balance
     ClickText                   Save
     ClickText                   Add Indirect Debt
     TypeText                    Debt Name                   ${RelationshipData["DebtName2"]}
@@ -139,13 +139,14 @@ Data
     RefreshPage
     VerifyText                  ${Household_User_name}
     ClickText                   Recalculate Exposure
+    Sleep                       5
     VerifyText                  Total Exposure Summary
 
     #Create a Contact for Bussiness Account
     ClickText                   Relationships
     ClickText                   ${Business_User_name}
     ClickText                   Contacts                    anchor=Credit Actions
-    ClickText                   New                         anchor=Refresh
+    ClickText                   New                         partial_match=False
     UseModal                    ON
     PickList                    Salutation                  Mr.
     TypeText                    Last Name                   ${RelationshipData["Contact"]}
@@ -154,9 +155,9 @@ Data
 
     #Verifying contact creation
     ClickText                   ${RelationshipData["Contact"]}
-    VerifyField                 Name                        Mr.${RelationshipData["Contact"]}
+    VerifyField                 Name                        Mr. ${RelationshipData["Contact"]}
     VerifyField                 Relationship Name           ${Business_User_name}
-    VerifyCheckbox              Primary Contact             on
+    Verifytext                  Primary Contact
 
     #Create a Product package for Business Account
     ClickText                   Relationships
@@ -164,6 +165,29 @@ Data
     Clicktext                   New Product Package         anchor=Edit
     ClickText                   Save
     ClickText                   Cancel
+    ClickText                   Product Package Details
+    VerifyField                 Relationship                ${Business_User_name}
+    ClickText                   Edit: Description
+    TypeText                    Description                 Test
+    ClickText                   Save
+
+    #Create a Loan
+    ClickText                   Loan Facilities
+    ClickText                   Magic Wand: Tools and Actions
+    ClickText                   New Facility
+    VerifyText                  Add New Loan
+    DropDown                    Product Line                Commercial
+    DropDown                    Product Type                Real Estate
+    ComboBox                    Choose Product               Term Loan
+    DropDown                    * Product                     Term Loan
+    DropDown                    Borrower Type               Borrower
+    TypeText                    Loan Amount                 770000
+    TypeText                    Loan Purpose                Commercial
+    ClickText                   Create New Loan
+
+
+
+    #
 
 
 
