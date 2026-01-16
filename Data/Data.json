@@ -44,7 +44,7 @@
       "Loan Assistant":"Satish R"
     },
     "data1EntityInvolvement":{
-      "Borrower Type","Borrower",
+      "Borrower Type":"Borrower",
       "Contingent Type":"Joint & Several",
       "Contingent Amount":7,856,666.00
     },
@@ -57,8 +57,8 @@
       "Description":"Loan for test"
     },
     "data1Fee":{
-      "Fee Type","Appraisal",
-      "Calculation Type","Percentage",
+      "Fee Type":"Appraisal",
+      "Calculation Type":"Percentage",
       "Percentage":79,
       "Fee Paid By":"Bank Paid",
       "Basis Source":"Loan Amount",
