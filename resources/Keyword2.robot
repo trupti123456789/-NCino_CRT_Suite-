@@ -301,7 +301,16 @@ Data
     Run Keyword                 Wait
     ClickText                   Continue
     ClickText                   Create Risk Rating
-    DropDown                    accounts-list               ${Business_User_name}       partial_match=True
+    ClickText     Relationship 
+    TypeText      accounts-list           ${Business_User_name}                        partial_match=True
+    Sleep        1
+   ClickText    ${Business_User_name}
+   
+
+    DropDown    accounts-list              _ Facebook 1768569619 - Corporation
+    ClickText    Create Risk Rating
+
+    DropDown                    *Relationship               ${Business_User_name}       partial_match=True
     DropDown                    templates-list              ${RelationshipData["templates-list"]}
     ClickText                   Save
     Run Keyword                 Wait
@@ -319,10 +328,10 @@ Data
     ClickText                   Select a date for Effective Date
     ClickText                   31
     ClickText                   *Covenant Type
-    ClickText                   ${RelationshipData["Covenant Type"]}
+    ClickText                   ${RelationshipData["Covenant_Type"]}
     ClickText                   *Frequency Template
-    ClickText                   ${RelationshipData["Frequency Template"]}
-    TypeText                    Grace Days                    ${RelationshipData["Grace Days"]}
+    ClickText                   ${RelationshipData["Frequency_Template"]}
+    TypeText                    Grace Days                    ${RelationshipData["Grace_Days"]}
     ClickText                   Create                      partial_match=False
 
 
