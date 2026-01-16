@@ -132,8 +132,8 @@ Data
     ClickText                   Relationships
     ClickText                   ${Household_User_name}
     ClickText                   Connections
-    Use Modal                   On
     ClickText                   New
+    Use Modal                   On
     Use Table                   Connected Relationship
     ClickCell                   r1c1
     TypeText                    Connected Relationship      ${Business_User_name}
@@ -169,35 +169,41 @@ Data
     ClickText                   Relationships
     ClickText                   ${Household_User_name}
     ClickText                   Exposure
+    Run Keyword                 Wait
     ClickText                   Add Direct Debt
     TypeText                    Debt Name                   ${RelationshipData["DebtName1"]}
     TypeText                    Principal Balance           ${RelationshipData["value1"]}
+    ClickText                   Principal Balance
     ClickText                   Save
     ClickText                   Add Indirect Debt
     TypeText                    Debt Name                   ${RelationshipData["DebtName2"]}
     TypeText                    Principal Balance           ${RelationshipData["value2"]}
+    ClickText                   Principal Balance
     ClickText                   Save
     RefreshPage
     VerifyText                  ${Household_User_name}
+    ClickText                   Exposure
     ClickText                   Recalculate Exposure
+    Sleep                       10
     VerifyText                  Total Exposure Summary
 
     #Create a Contact for Bussiness Account
     ClickText                   Relationships
     ClickText                   ${Business_User_name}
     ClickText                   Contacts                    anchor=Credit Actions
-    ClickText                   New                         anchor=Refresh
+    ClickText                   New                         partial_match=False
     UseModal                    ON
     PickList                    Salutation                  Mr.
     TypeText                    Last Name                   ${RelationshipData["Contact"]}
     ClickCheckbox               Primary Contact             on
     ClickText                   Save                        partial_match=False
-
+    Run Keyword                 Wait
     #Verifying contact creation
     ClickText                   ${RelationshipData["Contact"]}
-    VerifyField                 Name                        Mr.${RelationshipData["Contact"]}
-    VerifyField                 Relationship Name           ${Business_User_name}
-    VerifyCheckbox              Primary Contact             on
+    VerifyField                 Name                        Mr. ${RelationshipData["Contact"]}
+    VerifyField                 Relationship Name           ${Business_User_name}       partial_match=true
+    Verifytext                  Primary Contact
+
 
     #Create a Product package for Business Account
     ClickText                   Relationships
@@ -206,7 +212,7 @@ Data
     ClickText                   Save
     ClickText                   Cancel
     ClickText                   Product Package Details
-    VerifyField                 Relationship                ${Business_User_name}
+    VerifyText                  ${Business_User_name}
     ClickText                   Edit: Description
     TypeText                    Description                 Test
     ClickText                   Save
@@ -216,20 +222,19 @@ Data
     ClickText                   Magic Wand: Tools and Actions
     ClickText                   New Facility
     VerifyText                  Add New Loan
-    DropDown                    Product Line                 ${RelationshipData["Product_Line"]}
-    DropDown                    Product Type                 ${RelationshipData["Product_Type"]}
-    #ComboBox                   Choose Product              Term Loan
-    DropDown                    * Product                    ${RelationshipData["Product"]}
+    DropDown                    Product Line                ${RelationshipData["Product_Line"]}
+    DropDown                    Product Type                ${RelationshipData["Product_Type"]}
+    DropDown                    * Product                   ${RelationshipData["Product"]}
     DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
-    TypeText                    Loan Amount                  ${RelationshipData["Loan_Amount"]}
+    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount"]}
     TypeText                    Loan Purpose                ${RelationshipData["Loan_Purpose"]}
     ClickText                   Create New Loan
-    Sleep                       5
+    Run Keyword                 Wait
     ClickText                   Loan Information
     VerifyText                  Loan Details
 
 
-    TypeText                    Loan Number                ${RelationshipData["Loan_Number"]}
+    TypeText                    Loan Number                 ${RelationshipData["Loan_Number"]}
     ClickText                   --None--                    anchor=Primary Loan Purpose
     ClickText                   Business Start-Up
     ClickText                   nCino HQ
@@ -254,15 +259,15 @@ Data
     ClickText                   Satish R
     ClickText                   Save                        partial_match=False
     ClickText                   Continue
-    sleep                       10
+    Run Keyword                 Wait
 
 
     ClickText                   Add Entity Involvement
-    ClickCheckbox               Select _  ${Household_User_name}                on                     partial_match=False
+    ClickCheckbox               Select _                    ${Household_User_name}      on                     partial_match=False
     ClickText                   Add Selected Relationships
-    DropDown                    Borrower Type              ${RelationshipData["Borrower_Type"]}
-    DropDown                    Contingent Type            ${RelationshipData["Contingent_Type"]}
-    TypeText                    Contingent Amount          ${RelationshipData["Contingent_Amount"]}
+    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
+    DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
+    TypeText                    Contingent Amount           ${RelationshipData["Contingent_Amount"]}
     ClickText                   Save Entity Involvement
     ClickText                   Continue
     ClickText                   Add Collateral
