@@ -54,7 +54,7 @@
       "Value":100,
       "Collateral Name":"TestCollateral",
       "City":"USA",
-      "Description":"Loan for test",
+      "Description":"Loan for test"
     },
     "data1Fee":{
       "Fee Type","Appraisal",
