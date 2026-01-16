@@ -178,14 +178,101 @@ Data
     VerifyText                  Add New Loan
     DropDown                    Product Line                Commercial
     DropDown                    Product Type                Real Estate
-    ComboBox                    Choose Product               Term Loan
+    #ComboBox                    Choose Product               Term Loan
     DropDown                    * Product                     Term Loan
     DropDown                    Borrower Type               Borrower
     TypeText                    Loan Amount                 770000
     TypeText                    Loan Purpose                Commercial
     ClickText                   Create New Loan
+    Sleep                       5
+    ClickText                   Loan Information
+    VerifyText                  Loan Details
+    
 
+    TypeText    Loan Number    Test Loan
+    ClickText    --None--    anchor=Primary Loan Purpose
+    ClickText    Business Start-Up
+    ClickText    nCino HQ
+    ClickText    --None--    anchor=Application Method
+    ClickText    In-person
+    ClickText    --None--    anchor=Method of Doc Prep
+    ClickText    Attorney Prepared
+    ClickCheckbox    Is Participation    on
+    TypeText    Prepayment Penalty Description    Test in progress
+    ClickText    --None--    anchor=Secondary Source of Repayment
+    ClickText    Cash flow from Operations
+    ClickText    --None--    anchor=Primary Source of Repayment
+    ClickText    Lease Income
+    ClickText    --None--    anchor=Tertiary Source of Repayment
+    ClickText    Cash flow from Operations
+    ClickText    Loan Structuring
+    ClickText    Save
+    ClickText    Loan Structuring
+    ClickText    Continue
+    ClickText    Add New
+    ClickText    Loan Assistant
+    ClickText    Satish R
+    ClickText    Save    partial_match=False
+    ClickText    Continue
+    sleep        10
+    
 
+    ClickText    Add Entity Involvement
+   
+
+    ClickCheckbox    Select _ Meta Household 1768223456 - HH    on    partial_match=False
+    ClickText    Add Selected Relationships
+    DropDown    *Borrower Type    Borrower
+    DropDown    *Contingent Type    Joint & Several
+    TypeText    *Contingent Amount    7,856,666.00
+    ClickText    Save Entity Involvement
+    ClickText    Continue
+    ClickText    Add Collateral
+    ClickText    Add New Collateral
+    ClickItem    Select
+    ClickText    Next    parent=LIGHTNING-BUTTON
+    ClickText    Next
+    ClickText    *Type
+    ClickText    Real Estate
+    ClickText    *Subtype
+    ClickText    1-4 Family
+    TypeText    Value    100
+    TypeText    Collateral Name    TestCollateral
+    TypeText    City    USA
+    TypeText    Description    Loan for test
+    ClickText    Save & Next
+    ClickText    Save Pledged Collateral
+    ClickCheckbox    Select Item 1    on    partial_match=False
+    ClickText    Continue
+    
+
+    ClickText    Back
+    ClickText    Add Non-Standard Fee
+    DropDown    Fee Type    Appraisal
+    DropDown    Calculation Type    Percentage
+    TypeText    Percentage    79
+    DropDown    Fee Paid By    Bank Paid
+    DropDown    Basis Source    Loan Amount
+    TypeText    Amount    7900000
+    DropDown    Collection Method    Financed
+    ClickText    Save
+    ClickText    Continue
+    
+
+    DropDown    accounts-list    _ Facebook 1768223476 - Corporation
+    DropDown    templates-list    Commercial & Industrial
+    ClickText    Save
+    ClickText    Calculate and Save
+    ClickText    Calculate and Save
+    ClickText    Risk Rating Worksheet
+    ClickText    Related
+    ClickText    Loans
+    ClickText    _ Facebook 1768223476 - Term Loan - $60,000,000.00    parent=DIV
+    ClickText    Fees
+    ClickText    Loan Information
+    ClickText    Show/Hide Navigation Sidebar
+    ClickText    Show/Hide Navigation Sidebar
+    ClickText    Loan Structuring
 
     #
 
