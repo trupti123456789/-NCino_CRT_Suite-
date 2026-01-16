@@ -68,7 +68,6 @@ Data
     ...                         Borrower_Type=${data8["Borrower Type"]}
     ...                         Contingent_Type=${data8["Contingent Type"]}
     ...                         Contingent_Amount=${data8["Contingent Amount"]}
-    ...                         Contingent_Percentage=${data8["Contingent Percentage"]}
 
     ...                         Type=${data9["Type"]}
     ...                         Subtype=${data9["Subtype"]}
@@ -172,6 +171,7 @@ Data
     TypeText                    *Principal Balance           ${RelationshipData["value2"]}
     ClickText                   Principal Balance
     ClickText                   Save
+    Run Keyword                 Wait
     RefreshPage
     VerifyText                  ${Household_User_name}
     ClickText                   Exposure
@@ -261,11 +261,11 @@ Data
     Run Keyword                 Wait
     ClickText                   Add Entity Involvement
     ClickCheckbox               Select ${Household_User_name}      on                     partial_match=false
+    Run Keyword                 Wait
     ClickText                   Add Selected Relationships
     DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
     DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
     TypeText                    *Contingent Amount           ${RelationshipData["Contingent_Amount"]}
-    TypeText                    *Contingent Percentage          ${RelationshipData["Contingent_Percentage"]}
     ClickText                   Save Entity Involvement
     Run Keyword                 Wait
     ClickText                   Continue
