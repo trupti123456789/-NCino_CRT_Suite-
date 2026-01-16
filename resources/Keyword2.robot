@@ -83,15 +83,15 @@ Data
     ...                         Basis_Source=${data10["Basis Source"]}
     ...                         Amount=${data10["Amount"]}
     ...                         Collection_Method=${data10["Collection Method"]}
-      
-    ...                         templates-list=${data11["templates-list"]}  
-    
-    ...                        Category=${data12["Category"]} 
-    ...                        Covenant_Type=${data12["Covenant Type"]} 
-    ...                        Effective_Date=${data12["Effective Date"]} 
-    ...                        Frequency_Template=${data12["Frequency Template"]} 
-    ...                         Grace_Days=${data12["Grace Days"]} 
-    
+
+    ...                         templates-list=${data11["templates-list"]}
+
+    ...                         Category=${data12["Category"]}
+    ...                         Covenant_Type=${data12["Covenant Type"]}
+    ...                         Effective_Date=${data12["Effective Date"]}
+    ...                         Frequency_Template=${data12["Frequency Template"]}
+    ...                         Grace_Days=${data12["Grace Days"]}
+
     [Return]                    ${RelationshipData}
 
 
@@ -320,17 +320,29 @@ Data
     Run Keyword                 Wait
     ClickText                   Continue
     ClickText                   Create Risk Rating
-    DropDown                    accounts-list                 ${Business_User_name}     partial_match=True
+    DropDown                    accounts-list               ${Business_User_name}       partial_match=True
     DropDown                    templates-list              ${RelationshipData["templates-list"]}
     ClickText                   Save
-    Run Keyword                Wait
+    Run Keyword                 Wait
     RefreshPage
-    ClickText                  Relationships
-    ClickText                  ${Business_User_name}  
-    ClickText                  Credit Resources      
-    ClickText                  Covenants
-    ClickText                  Create Covenant
-    UseModal                   On
+    ClickText                   Relationships
+    ClickText                   ${Business_User_name}
+    ClickText                   Credit Resources
+    ClickText                   Covenants
+    ClickText                   Create Covenant
+    UseModal                    On
+    ClickText                   *Category
+    ClickText                   ${RelationshipData["Category"]}
+    ClickText                   *Effective Date
+    ClickText                   Effective Date Help Info
+    ClickText                   Select a date for Effective Date
+    ClickText                   31
+    ClickText                   *Covenant Type
+    ClickText                   ${RelationshipData["Covenant Type"]}
+    ClickText                   *Frequency Template
+    ClickText                   ${RelationshipData["Frequency Template"]}
+    TypeText                    Grace Days                    ${RelationshipData["Grace Days"]}
+    ClickText                   Create                      partial_match=False
 
 
 
