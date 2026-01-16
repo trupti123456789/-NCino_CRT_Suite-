@@ -43,10 +43,10 @@
       "Tertiary Source of Repayment":"Cash flow from Operation",
       "Loan Assistant":"Satish R"
     },
-    "data1EntityInvolvement":{
-      "Borrower Type":"Borrower",
-      "Contingent Type":"Joint & Several",
-      "Contingent Amount":7,856,666.00
+    "data1EntityInvolvement": {
+      "Borrower Type": "Borrower",
+      "Contingent Type": "Joint & Several",
+      "Contingent Amount": 7856666.00
     },
     "data1Collateral":{
       "Type":"Real Estate",
@@ -57,13 +57,12 @@
       "Description":"Loan for test"
     },
     "data1Fee": {
-  "Fee Type": "Appraisal",
-  "Calculation Type": "Percentage",
-  "Percentage": 79,
-  "Fee Paid By": "Bank Paid",
-  "Basis Source": "Loan Amount",
-  "Amount": 7900000,
-  "Collection Method": "Financed"
+      "Fee Type": "Appraisal",
+      "Calculation Type": "Percentage",
+      "Percentage": 79,
+      "Fee Paid By": "Bank Paid",
+      "Basis Source": "Loan Amount",
+      "Amount": 7900000,
+      "Collection Method": "Financed"
    }
-
 }
