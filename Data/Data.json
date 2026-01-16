@@ -47,7 +47,8 @@
     "EntityInvolvement": {
       "Borrower Type": "Borrower",
       "Contingent Type": "Joint & Several",
-      "Contingent Amount": 785600
+      "Contingent Amount": 785600,
+      "Contingent Percentage": 78
     },
     "Collateral":{
       "Type":"Real Estate",
