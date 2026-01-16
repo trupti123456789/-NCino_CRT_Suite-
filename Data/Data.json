@@ -14,17 +14,17 @@
       "Relationship Name": "Mark",
       "Type": "Individual"
     },
-    "data1DirectDebt":{
+    "DirectDebt":{
        "Debt Name": "Direct Debt",
        "Principal Balance":234566,
        "Maturity Date":"02-02-2027"
     },
-    "data2IndirectDebt":{
+    "IndirectDebt":{
        "Debt Name": "Indirect Debt",
        "Principal Balance":237866,
         "Maturity Date":"2-3-2027"
     },
-    "data1Loan":{
+    "Loan":{
       "Product Line":"Commercial",
       "Product Type":"Real Estate",
       "Product":"Term Loan",
@@ -32,7 +32,7 @@
       "Loan Amount":770000,
       "Loan Purpose":"Commercial use"
     },
-    "data2LoanData":{
+    "LoanData":{
       "Loan Number":"Test Loan121",
       "Primary Loan Purpose":"Business Start-Up",
       "Application Method":"In-person",
@@ -44,12 +44,12 @@
       "Role":"Loan Assistant",
       "User":"Satish R"
     },
-    "data1EntityInvolvement": {
+    "EntityInvolvement": {
       "Borrower Type": "Borrower",
       "Contingent Type": "Joint & Several",
       "Contingent Amount": 785600
     },
-    "data1Collateral":{
+    "Collateral":{
       "Type":"Real Estate",
       "Subtype":"1-4 Family",
       "Value":100,
@@ -57,7 +57,7 @@
       "City":"USA",
       "Description":"Loan for test"
     },
-    "data1Fee": {
+    "Fee": {
       "Fee Type": "Appraisal",
       "Calculation Type": "Percentage",
       "Percentage": 79,
@@ -65,5 +65,15 @@
       "Basis Source": "Loan Amount",
       "Amount": 7900000,
       "Collection Method": "Financed"
+   },
+   "RiskRating":{
+     "templates-list":"Commercial Real Estate"
+   },
+   "Covenant":{
+    "Category":"Term Covenants",
+    "Covenant Type":"Deposit Relationship",
+    "Effective Date":"Jan 31, 2027",
+     "Frequency Template":"Annually",
+     "Grace Days":100
    }
 }
