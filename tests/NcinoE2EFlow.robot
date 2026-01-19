@@ -9,7 +9,7 @@ Suite Teardown                  End Suite
 #nCino customization differs with organization, please check the configuration in your nCino Org and make the changes accordingly.
 *** Test Cases ***   
 E2E_flow
-    ${RelationshipData}=                                     Data
+    ${RelationshipData}=  Data
     Adding Relationships for Customer Onboarding            ${RelationshipData}
     Verify the Relationships                                ${RelationshipData}
     Create a connection for the household relationship      ${RelationshipData}
