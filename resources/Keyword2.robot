@@ -62,6 +62,7 @@ Data
     ...                         Secondary_Source_of_Repayment=${data7["Secondary Source of Repayment"]}
     ...                         Primary_Source_of_Repayment=${data7["Primary Source of Repayment"]}
     ...                         Tertiary_Source_of_Repayment=${data7["Tertiary Source of Repayment"]}
+    ...                         Loan_Amount=${data7["Loan Amount"]}
     ...                         User=${data7["User"]}
     ...                         Role=${data7["Role"]}
 
@@ -241,7 +242,7 @@ Data
     ClickText                   ${RelationshipData["Primary_Source_of_Repayment"]}
     ClickText                   --None--                    anchor=Tertiary Source of Repayment
     ClickText                   ${RelationshipData["Tertiary_Source_of_Repayment"]}
-    TypeText                    Loan Amount                 7600000
+    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount "]}
     ClickText                   Save
     Run Keyword                 Wait
     ClickText                   Loan Structuring
