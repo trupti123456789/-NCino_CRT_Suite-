@@ -267,7 +267,7 @@ Fill the Loan information
     ClickText                   ${RelationshipData["Primary_Source_of_Repayment"]}
     ClickText                   --None--                    anchor=Tertiary Source of Repayment
     ClickText                   ${RelationshipData["Tertiary_Source_of_Repayment"]}
-    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount "]}
+    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount"]}
     ClickText                   Save
     Run Keyword                 Wait
     ClickText                   Loan Structuring
