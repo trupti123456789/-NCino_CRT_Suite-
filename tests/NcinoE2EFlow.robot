@@ -7,7 +7,7 @@ Suite Setup                     Setup Browser
 Suite Teardown                  End Suite
 
 #nCino customization differs with organization, please check the configuration in your nCino Org and make the changes accordingly.
-*** Test Cases ***
+*** Test Cases ***   
 E2E_flow
     ${RelationshipData}=                                     Data
     Adding Relationships for Customer Onboarding            ${RelationshipData}
