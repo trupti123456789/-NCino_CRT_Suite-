@@ -96,7 +96,7 @@ Data
     [Return]                    ${RelationshipData}
 
 
- Adding Relationships for Customer Onboarding
+Adding Relationships for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
     [Arguments]                 ${RelationshipData}
     Home
@@ -139,8 +139,9 @@ Data
     TypeText                    Relationship Name           ${Individual_User_name}
     Picklist                    Type                        ${RelationshipData["Type2"]}
     ClickText                   Save                        partial_match=False
-
- Verify the Relationships  
+     [Return]                    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
+Verify the Relationships  
+   [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Relationships
     VerifyText                  ${Individual_User_name}
     VerifyText                  ${Business_User_name}
@@ -154,7 +155,8 @@ Data
     ClickText                   ${Individual_User_name}
      VerifyField                Relationship Type    ${RelationshipData["Type2"]}
 
- Create a connection for the household relationship
+Create a connection for the household relationship
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Relationships
     ClickText                   ${Household_User_name}
     ClickText                   Connections
@@ -167,7 +169,8 @@ Data
     ClickText                   Save
     Run Keyword                 Wait
 
- Verify the Exposer abd create the debts
+Verify the Exposer abd create the debts
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Relationships
     ClickText                   ${Household_User_name}
     ClickText                   Exposure
@@ -194,7 +197,8 @@ Data
     Sleep                       20
     VerifyText                  Total Exposure Summary
 
- Create a Contact for Bussiness Account
+Create a Contact for Bussiness Account
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Relationships
     ClickText                   ${Business_User_name}
     ClickText                   Contacts                    anchor=Credit Actions
@@ -205,14 +209,16 @@ Data
     ClickCheckbox               Primary Contact             on
     ClickText                   Save                        partial_match=False
     Run Keyword                 Wait
- Verifying contact creation
+Verifying contact creation
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   ${RelationshipData["Contact"]}
     VerifyField                 Name                        Mr. ${RelationshipData["Contact"]}
     VerifyField                 Relationship Name           ${Business_User_name}       partial_match=true
     Verifytext                  Primary Contact
 
 
- Create a Product package for Business Account
+Create a Product package for Business Account
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Relationships
     ClickText                   ${Business_User_name}
     Clicktext                   New Product Package         anchor=Edit
@@ -224,7 +230,8 @@ Data
     TypeText                    Description                 Test
     ClickText                   Save
 
- Create a new Loan
+Create a new Loan
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Loan Facilities
     ClickText                   Magic Wand: Tools and Actions
     ClickText                   New Facility
@@ -240,7 +247,8 @@ Data
     ClickText                   Loan Information
     VerifyText                  Loan Details
 
- Fill the Loan information
+Fill the Loan information
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     TypeText                    Loan Number                 ${RelationshipData["Loan_Number"]}
     ClickText                   --None--                    anchor=Primary Loan Purpose
     ClickText                   ${RelationshipData["Primary_Loan_Purpose"]}
@@ -263,7 +271,8 @@ Data
     VerifyAll                   Loan Information from Details,Loan Calculated Fields
     ClickText                   Continue
      
- Add Team Member in Loan   
+Add Team Member in Loan   
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Add New
     UseModal                    On
     ClickText                   Role
@@ -277,7 +286,8 @@ Data
     ClickText                   Continue
     Run Keyword                 Wait
      
- Add Entity Involvement in Loan   
+Add Entity Involvement in Loan  
+   [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Add Entity Involvement
     ClickCheckbox               Select ${Household_User_name}                           on                     partial_match=false
     ClickCheckbox               Select ${Household_User_name}                           off                    partial_match=false
@@ -291,7 +301,8 @@ Data
     Run Keyword                 Wait
     ClickText                   Continue
      
- Add Collateral in Loan  
+Add Collateral in Loan
+    [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Add Collateral
     ClickText                   Add New Collateral
     ClickItem                   Select
@@ -313,7 +324,8 @@ Data
     ClickCheckbox               Select Item 1               on                          partial_match=False
     ClickText                   Continue
      
- Add Fee in Loan  
+Add Fee in Loan 
+    [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name} 
     ClickText                   Add Fee
     ClickText                   Add Non-Standard Fee
     DropDown                    Fee Type                    ${RelationshipData["Fee_Type"]}
@@ -327,7 +339,8 @@ Data
     Run Keyword                 Wait
     ClickText                   Continue
      
- Create Risk Rating in Loan  
+Create Risk Rating in Loan 
+  [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Create Risk Rating
     ClickElement                xpath=//select[@id="accounts-list"]
     DropDown                    accounts-list               ${Business_User_name} - Corporation                partial_match=False
@@ -337,7 +350,8 @@ Data
     Run Keyword                 Wait
     RefreshPage
      
- Add Covenants in Loan   
+Add Covenants in Loan   
+   [Arguments]                 ${RelationshipData}    ${Household_User_name}    ${Business_User_name}    ${Individual_User_name}
     ClickText                   Relationships
     ClickText                   ${Business_User_name}
     ClickText                   Credit Resources
@@ -358,7 +372,7 @@ Data
 
 
 
-    #
+    
 
 
 
