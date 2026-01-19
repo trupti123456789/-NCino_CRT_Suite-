@@ -142,7 +142,7 @@ Adding Relationships for Customer Onboarding
     TypeText                    Relationship Name           ${Individual_User_name}
     Picklist                    Type                        ${RelationshipData["Type2"]}
     ClickText                   Save                        partial_match=False
-    [Return]                    ${Household_User_name}      ${Business_User_name}       ${Individual_User_name}
+    
 Verify the Relationships  
     [Arguments]                 ${RelationshipData}         
     ClickText                   Relationships
