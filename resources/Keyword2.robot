@@ -187,7 +187,7 @@ Verify the Exposer abd create the debts
     ClickText                   Save
     Run Keyword                 Wait
     ClickText                   Add Indirect Debt
-    TypeText                    Debt Name                   ${RelationshipData["DebtName2"]}    
+    TypeText                    Debt Name                   ${RelationshipData["DebtName2"]}
     ClickText                   Principal Balance           delay=5
     TypeText                    *Principal Balance          ${RelationshipData["value2"]}
     ClickText                   Principal Balance
@@ -294,10 +294,10 @@ Add Entity Involvement in Loan
     ClickText                   Add Entity Involvement
     UseModal                    On
     ClickCheckbox               Select ${Household_User_name}                           on                     partial_match=false
-    ClickCheckbox               Select ${Household_User_name}                           off                    partial_match=false
-    ClickCheckbox               Select ${Household_User_name}                           on                     partial_match=false    delay=5
+    ClickCheckbox               Select all                  on
     Run Keyword                 Wait
     ClickText                   Add Selected Relationships
+     UseModal                    On
     DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
     DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
     TypeText                    *Contingent Amount          ${RelationshipData["Contingent_Amount"]}           delay=5
@@ -376,7 +376,7 @@ Verify Covenant in loan
     [Arguments]                 ${RelationshipData}
     Clicktext                   Covenants
     ClickElement                xpath=//button[contains(@title,'COV-')]
-    VerifyAll                  Category,Covenant Type
+    VerifyAll                   Category,Covenant Type
     Verifytext                  ${RelationshipData["Category"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
 
