@@ -28,6 +28,7 @@ Data
     ${data11}=                  Set Variable                ${dataA["RiskRating"]}
     ${data12}=                  Set Variable                ${dataA["Covenant"]}
     ${data13}=                  Set Variable                ${dataA["Credit Memo"]}
+    ${data14}=                  Set Variable                ${dataA["Document Manager"]}
 
     # Setting variables for relationship data
     ${RelationshipData}=        Create Dictionary
@@ -96,6 +97,10 @@ Data
     ...                         Description=${data13["Description"]}
     ...                         Credit_Memo_Screen_Name=${data13["Credit Memo Screen Name"]}
     ...                         Template_Name=${data13["Template Name"]}
+     
+    ...                         Category=${data14["Category"]}
+    ...                        Name=${data14["Name"]}
+    ...                        Year=${data14["Year"]}
 
     [Return]                    ${RelationshipData}
 
@@ -403,6 +408,31 @@ Create a Credit Memo
    Typetext                    Template Name                    ${RelationshipData["Template_Name"]}
    Clicktext                   Save                      anchor=Save & New
    Clicktext                   Cancel
+    
+
+Configure Document Manager
+  [Arguments]                 ${RelationshipData}
+   ClickText                   Relationships
+   Clicktext                   ${Business_User_name}
+   Clicktext                   Document Manager
+   Run Keyword                 Wait
+   Clicktext                 Add Placeholder        delay=5
+   Usemodal                  on
+   Dropdown                  *Category              ${RelationshipData["Category"]}
+   Dropdown                  *Name                   ${RelationshipData["Name"]}
+   Typetext                  Year                    ${RelationshipData["Year"]}
+   Clicktext                 Save                    anchor=Cancel
+   Usemodal                  Off
+   Clicktext                 ${RelationshipData["Name"]}
+   VerifyAll                 Name,Category,Year                
+   Verifytext                  ${RelationshipData["Name"]}
+   Verifytext                  ${RelationshipData["Category"]}        
+   Verifytext                  ${RelationshipData["Year"]}
+                       
+
+
+
+
 
 
     
