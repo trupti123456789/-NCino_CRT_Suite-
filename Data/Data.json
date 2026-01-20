@@ -76,5 +76,12 @@
     "Effective Date":"Jan 31, 2027",
      "Frequency Template":"Annually",
      "Grace Days":100
+   },
+   "Credit Memo":{
+    "Credit Memo Name":"Test_Memo_Template",
+     "Object API Name":"Test_Memo_Temp_API",
+     "Description":"generation of the Credit Memo feature offers a streamlined experience to create and configure credit memo templates without custom code",
+     "Credit Memo Screen Name":"Screen_Template",
+     "Template Name":"nCino_Test_Template"
    }
 }
