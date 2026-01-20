@@ -49,3 +49,14 @@ Generate Unique Name
     ${ts}=                      Get Time                    epoch
     ${unique}=                  Catenate                    _                           ${base_name}                ${ts}
     [Return]                    ${unique}
+
+Get File Path Based on Mode
+
+    [Arguments]    ${uploadfilepath}
+    ${contains}=    Evaluate    'execution' in '''${SUITE_SOURCE}'''
+   IF    ${contains}
+           ${File}=    Set Variable    /home/executor/execution/NCino-CRT-Suite/${uploadfilepath}
+    ELSE
+        ${File}=    Set Variable    /home/services/suite/${uploadfilepath}
+    END
+    RETURN   ${File}    
