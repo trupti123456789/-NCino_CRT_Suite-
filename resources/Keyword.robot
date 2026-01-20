@@ -430,6 +430,9 @@ Configure Document Manager
     VerifyAll                   Name,Category,Year
     Verifytext                  ${RelationshipData["Name"]}
     Verifytext                  ${RelationshipData["Category"]}
+    ${relative_path}        Set Variable                tests/../Data/PO.pdf
+    ${file_path}            Get File Path Based on Mode                             ${relative_path}
+    UploadFile              Upload Files                ${file_path}
 
 
 
