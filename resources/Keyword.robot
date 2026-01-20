@@ -25,6 +25,7 @@ Data
     ${data10}=                  Set Variable                ${dataA["Fee"]}
     ${data11}=                  Set Variable                ${dataA["RiskRating"]}
     ${data12}=                  Set Variable                ${dataA["Covenant"]}
+    ${data13}=                  Set Variable                ${dataA["Credit Memo"]}
 
     # Setting variables for relationship data
     ${RelationshipData}=        Create Dictionary
@@ -87,6 +88,12 @@ Data
     ...                         Effective_Date=${data12["Effective Date"]}
     ...                         Frequency_Template=${data12["Frequency Template"]}
     ...                         Grace_Days=${data12["Grace Days"]}
+     
+    ...                         Credit_Memo_Name=${data13["Credit Memo Name"]}
+    ...                         Object_API_Name=${data13["Object API Name"]}
+    ...                         Description=${data13["Description"]}
+    ...                         Credit_Memo_Screen_Name=${data13["Credit Memo Screen Name"]}
+    ...                         Template_Name=${data13["Template Name"]}
 
     [Return]                    ${RelationshipData}
 
@@ -375,6 +382,27 @@ Verify Covenant in loan
     VerifyAll                   Category,Covenant Type
     Verifytext                  ${RelationshipData["Category"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
+
+Create a Credit Memo
+   [Arguments]                 ${RelationshipData}
+   LaunchApp                   Credit Memos
+   Clicktext                   New         Anchor=Change Owner
+   Usemodal                    On
+   Typetext                    *Credit Memo Name       ${RelationshipData["Credit_Memo_Name"]} 
+   Typetext                    Description              ${RelationshipData["Description"]} 
+   Typetext                    *Object API Name          ${RelationshipData["Object_API_Name"]} 
+   Clicktext                   Save                      partial_false=False
+   Clicktext                   Related
+   Clicktext                   Credit Memo Screens
+   Clicktext                   New                       anchor=Change Owner
+   Usemodal                    On
+   Typetext                    *Credit Memo Screen Name         ${RelationshipData["Credit_Memo_Screen_Name"]}
+   Typetext                    Template Name                    ${RelationshipData["Template_Name"]}
+   Clicktext                   Save                      partial_false=False
+
+
+
+    
 
 
 
