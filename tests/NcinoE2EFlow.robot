@@ -27,8 +27,8 @@ E2E flow
     Create Risk Rating in Loan                              ${RelationshipData}
     Add Covenants in Loan                                   ${RelationshipData}
     Verify Covenant in loan                                 ${RelationshipData}
-    
     Create a Credit Memo                                    ${RelationshipData}
+    Configure Document Manager                              ${RelationshipData}
 
 
 
