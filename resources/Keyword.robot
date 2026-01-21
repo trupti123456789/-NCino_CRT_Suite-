@@ -90,7 +90,7 @@ Data
 
     ...                         templates-list=${data11["templates-list"]}
 
-    ...                         Category=${data12["Category"]}
+    ...                         Category=${data12["CategoryCov"]}
     ...                         Covenant_Type=${data12["Covenant Type"]}
     ...                         Effective_Date=${data12["Effective Date"]}
     ...                         Frequency_Template=${data12["Frequency Template"]}
@@ -393,6 +393,8 @@ Verify Covenant in loan
     VerifyAll                   Category,Covenant Type
     Verifytext                  ${RelationshipData["Category"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
+     
+
 
 Create a Credit Memo
     [Arguments]                 ${RelationshipData}
