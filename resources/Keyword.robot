@@ -96,11 +96,12 @@ Data
     ...                         Frequency_Template=${data12["Frequency Template"]}
     ...                         Grace_Days=${data12["Grace Days"]}
 
-    ...                         Credit_Memo_Name=${data13["Credit Memo Name"]}
-    ...                         Object_API_Name=${data13["Object API Name"]}
-    ...                         Description=${data13["Description"]}
-    ...                         Credit_Memo_Screen_Name=${data13["Credit Memo Screen Name"]}
-    ...                         Template_Name=${data13["Template Name"]}
+    ...                         Total_Borrower_Exposure=${data13["Total Borrower Exposure"]}
+    ...                         Total_Obligor_Exposure=${data13["Total Obligor Exposure"]}
+    ...                         Unused=${data13["Unused"]}
+    ...                         Outstanding=${data13["Outstanding"]}
+    ...                         Total_Credit_Exposur=${data13["Total Credit Exposur"]}
+    ...                         New_Money=${data13["New Money"]}
 
     ...                         Category=${data14["Category"]}
     ...                         Name=${data14["Name"]}
@@ -386,6 +387,7 @@ Add Covenants in Loan
     ClickText                   ${RelationshipData["Frequency_Template"]}
     TypeText                    Grace Days                  ${RelationshipData["Grace_Days"]}
     ClickText                   Create                      partial_match=False
+    Run Keyword                 Wait
 Verify Covenant in loan
     [Arguments]                 ${RelationshipData}
     Clicktext                   Covenants
@@ -393,7 +395,27 @@ Verify Covenant in loan
     VerifyAll                   Category,Covenant Type
     Verifytext                  ${RelationshipData["Category"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
-     
+
+Create a Credit Memo from Product Package 
+   [Arguments]                 ${RelationshipData}
+   Clicktext                   Product Package
+   Clicktext                    ${Business_User_name}    partial_match=True
+   Verifytext                   Package Information
+
+    ClickText    Edit: Household
+    Clickelement                xpath=//label[text()='Household']//following::lightning-helptext//following-sibling::div//input
+    ClickText                    ${Household_User_name}  
+        Clickelement                xpath=//label[text()='Primary Officer']//following-sibling::div//input
+     Clicktext                      ${RelationshipData["User"]}
+     Clickelement                   xpath=//label[text()='Secondary Officer']//following-sibling::div//input
+     Clicktext                       ${RelationshipData["User"]}
+    TypeText    Total Borrower Exposure    9900
+    TypeText    Total Obligor Exposure    2200
+    TypeText    Unused    1000
+    TypeText    Outstanding    5000
+    TypeText    Total Credit Exposure    15000
+    TypeText    New Money    1000
+    ClickText    Save
 
 
 Create a Credit Memo
