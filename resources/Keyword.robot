@@ -478,7 +478,66 @@ Create a Credit Memo
     UploadFile                  Upload                      ${file_path}
     Run Keyword                 Wait
     QVision.Clicktext           Placeholder
-    QVision.Typetext            Type to filter placeholder                              Credit Memo
+    QVision.Clicktext           ${RelationshipData["Document_Placeholder_Name"]}
+    ClickText                   Save
+    Back
+
+
+Loan submit for Approval
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Magic Wand
+    Clicktext                   Submit For Approval
+    VerifyText                  Product Package Approval Process
+    ClickText                   Back to Product Package
+    VerifyText                  This Product Package is currently pending approval and locked for any edits
+
+Loan Approver by assign User   
+    [Arguments]                 ${RelationshipData}
+    LaunchApp                   Approval Requests
+    VerifyText                  ${Business_User_name}
+    ClickText                   Show Actions                anchor=${Business_User_name}
+    ClickText                   Approve
+    TypeText                    Comments                    Approving test 1
+    Run Keyword                 Wait
+    ClickText                   Approve                     partial_match=False
+    VerifyText                  ${Business_User_name}
+    ClickText                   Show Actions                anchor=${Business_User_name}
+    ClickText                   Approve
+    TypeText                    Comments                    Approving test 2
+    Run Keyword                 Wait
+    ClickText                   Approve                     partial_match=False
+
+Generate Commitment Letter via Generate Forms 
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
+    Clicktext                   Magic Wand
+    ClickText                   Generate Forms
+    ClickText                   Generate
+    Run Keyword                 Wait
+   # ${file_path}=              Verify File Download        timeout=30
+
+Configuring Loan
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 1Create a Credit Memo
