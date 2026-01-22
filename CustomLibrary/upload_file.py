@@ -6,7 +6,7 @@ import os
 class UploadFile:
 
     @keyword("Custom Upload File")
-    def custom_upload_file(self, file_input_xpath, file_path, upload_button_xpath=None):
+    def custom_upload_file(self, file_path, file_input_xpath, upload_button_xpath=None):
 
         if not os.path.exists(file_path):
             raise Exception(f"File not found: {file_path}")
