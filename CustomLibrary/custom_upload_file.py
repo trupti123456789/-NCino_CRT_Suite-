@@ -3,7 +3,7 @@ from robot.libraries.BuiltIn import BuiltIn
 import os
 
 @library
-class UploadFile:
+class CustomUploadFile:
 
     @keyword("Custom Upload File")
     def custom_upload_file(self, file_path, file_input_xpath, upload_button_xpath=None):
