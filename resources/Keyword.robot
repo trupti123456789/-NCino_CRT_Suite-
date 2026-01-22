@@ -527,10 +527,16 @@ Configuring Loan
     ClickText                   ${Business_User_name}
     ${relative_path}            Set Variable                tests/../Data/PO.pdf
     ${file_patha}                Get File Path Based on Mode                             ${relative_path}
-    Custom Upload File   ${file_patha}     //input[@type='file']        //button[@title='Upload']
+    Custom Upload File            ${file_patha}     //input[@type='file']        //button[text()='Upload File']
 
 
 
+${file_patha}=    Get Upload File Path    Data/po.pdf
+
+  Custom Upload File
+  ...    ${file_patha}
+  ...    //input[@type='file']
+  ...    //button[@title='Upload']
 
 
 
