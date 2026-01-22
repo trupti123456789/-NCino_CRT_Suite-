@@ -527,7 +527,7 @@ Configuring Loan
     ClickText                   ${Business_User_name}
 
     
-  Upload File From Data Folder    po.pdf
+   Upload File From Data Folder    po.pdf
 
 
 
