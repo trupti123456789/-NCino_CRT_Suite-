@@ -5,7 +5,7 @@ Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
 Library                         OperatingSystem
-Library                         ../CustomLibrary/upload_file.py
+Library                         ../CustomLibrary/custom_upload_file.py
 Resource                        ../resources/common.robot
 Suite Setup                     Setup Browser
 Suite Teardown                  End Suite
