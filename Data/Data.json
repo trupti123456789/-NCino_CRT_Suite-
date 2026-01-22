@@ -78,6 +78,7 @@
      "Grace Days":100
    },
    "Product Package":{
+     "Parent Household":"Test_Opportunity - HH",
      "Total Borrower Exposure":9999,
      "Total Obligor Exposure":2222,
      "Unused":2222,
