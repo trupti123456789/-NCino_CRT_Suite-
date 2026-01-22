@@ -525,8 +525,9 @@ Configuring Loan
     [Arguments]                 ${RelationshipData}
     ClickText                   Loans
     ClickText                   ${Business_User_name}
-
-    
+    ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Upload File Using Full Path    ${file_path}    
    Upload File From Data Folder    po.pdf
    Upload File From Data Folder    po.pdf    //button[@title='Upload']
 
