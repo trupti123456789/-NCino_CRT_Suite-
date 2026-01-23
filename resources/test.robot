@@ -467,13 +467,6 @@ Loan Approver by assign User
     ClickText                   Approve                     partial_match=False
 
 
-Change the loan stege from Approval to Processing
-        [Arguments]                 ${RelationshipData}    ${stage}
-    ClickText                   Loans
-    Clicktext                   ${Business_User_name}       partial_match=True
-    Clicktext                   Mark Stage as Complete
-    sleep                       3
-    Verify LOS Stage Using VerifyElement   Processing
 
 Update the Origination Fee
     [Arguments]                 ${RelationshipData}
@@ -535,7 +528,14 @@ Complete/Review HMDA and CRA Reporting
     ClickText    HMDA-Effective-2017    anchor=Skip to Navigation
     ClickText    Save
 
-   
+
+Change the loan stege from Approval to Processing
+        [Arguments]                 ${RelationshipData}    ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement   Processing   
 
   
 
