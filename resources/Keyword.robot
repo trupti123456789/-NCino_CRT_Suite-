@@ -20,105 +20,106 @@ Data
     ${Json_obj}=                Evaluate                    open('${CURDIR}/../Data/Data.json').read()              json
     ${dataA}=                   Evaluate                    json.loads('''${Json_obj}''')                           json
 
-    # Extracting data for relationship object and logging the values
-    ${data1}=                   Set Variable                ${dataA["data1Relationship"]}
-    ${data2}=                   Set Variable                ${dataA["data2Relationship"]}
-    ${data3}=                   Set Variable                ${dataA["data3Relationship"]}
-    ${data4}=                   Set Variable                ${dataA["DirectDebt"]}
-    ${data5}=                   Set Variable                ${dataA["IndirectDebt"]}
-    ${data6}=                   Set Variable                ${dataA["Loan"]}
-    ${data7}=                   Set Variable                ${dataA["LoanData"]}
-    ${data8}=                   Set Variable                ${dataA["EntityInvolvement"]}
-    ${data9}=                   Set Variable                ${dataA["Collateral"]}
-    ${data10}=                  Set Variable                ${dataA["Fee"]}
-    ${data11}=                  Set Variable                ${dataA["RiskRating"]}
-    ${data12}=                  Set Variable                ${dataA["Covenant"]}
-    ${data13}=                  Set Variable                ${dataA["Product Package"]}
-    ${data14}=                  Set Variable                ${dataA["Document Manager"]}
-    ${data15}=                  Set Variable                ${dataA["Compliance"]}
-    # Setting variables for relationship data
+    
+    ${Household_Rel}=           Set Variable                ${dataA["data1Relationship"]}
+    ${Business_Rel}=            Set Variable                ${dataA["data2Relationship"]}
+    ${Individual_Rel}=          Set Variable                ${dataA["data3Relationship"]}
+    ${Direct_D}=                Set Variable                ${dataA["DirectDebt"]}
+    ${Indirect_D}=              Set Variable                ${dataA["IndirectDebt"]}
+    ${Loan}=                    Set Variable                ${dataA["Loan"]}
+    ${Loan_Info}=               Set Variable                ${dataA["LoanData"]}
+    ${Entity_Inv}=              Set Variable                ${dataA["EntityInvolvement"]}
+    ${Collateral}=              Set Variable                ${dataA["Collateral"]}
+    ${Fee}=                     Set Variable                ${dataA["Fee"]}
+    ${Risk_R}=                  Set Variable                ${dataA["RiskRating"]}
+    ${Covenant}=                Set Variable                ${dataA["Covenant"]}
+    ${Product_Pac}=             Set Variable                ${dataA["Product Package"]}
+    ${Doc_Man}=                 Set Variable                ${dataA["Document Manager"]}
+    ${Compliance}=              Set Variable                ${dataA["Compliance"]}
+
+    
     ${RelationshipData}=        Create Dictionary
-    ...                         Name=${data1["Relationship Name"]}
-    ...                         Type0=${data1["Type"]}
-    ...                         Role=${data1["Role"]}
-    ...                         Name1=${data2["Relationship Name"]}
-    ...                         Type1=${data2["Type"]}
-    ...                         Role1=${data2["Role"]}
-    ...                         Contact=${data2["Contact"]}
-    ...                         Name2=${data3["Relationship Name"]}
-    ...                         Type2=${data3["Type"]}
-    ...                         DebtName1=${data4["Debt Name"]}
-    ...                         value1=${data4["Principal Balance"]}
-    ...                         DebtName2=${data5["Debt Name"]}
-    ...                         value2=${data5["Principal Balance"]}
+    ...                         Name=${Household_Rel["Relationship Name"]}
+    ...                         Type0=${Household_Rel["Type"]}
+    ...                         Role=${Household_Rel["Role"]}
+    ...                         Name1=${Business_Rel["Relationship Name"]}
+    ...                         Type1=${Business_Rel["Type"]}
+    ...                         Role1=${Business_Rel["Role"]}
+    ...                         Contact=${Business_Rel["Contact"]}
+    ...                         Name2=${Individual_Rel["Relationship Name"]}
+    ...                         Type2=${Individual_Rel["Type"]}
+    ...                         DebtName1=${Direct_D["Debt Name"]}
+    ...                         value1=${Direct_D["Principal Balance"]}
+    ...                         DebtName2=${Indirect_D["Debt Name"]}
+    ...                         value2=${Indirect_D["Principal Balance"]}
 
-    ...                         Product_Line=${data6["Product Line"]}
-    ...                         Product_Type=${data6["Product Type"]}
-    ...                         Product=${data6["Product"]}
-    ...                         Borrower_Type=${data6["Borrower Type"]}
-    ...                         Loan_Amount=${data6["Loan Amount"]}
-    ...                         Loan_Purpose=${data6["Loan Purpose"]}
+    ...                         Product_Line=${Loan["Product Line"]}
+    ...                         Product_Type=${Loan["Product Type"]}
+    ...                         Product=${Loan["Product"]}
+    ...                         Borrower_Type=${Loan["Borrower Type"]}
+    ...                         Loan_Amount=${Loan["Loan Amount"]}
+    ...                         Loan_Purpose=${Loan["Loan Purpose"]}
 
-    ...                         Loan_Number=${data7["Loan Number"]}
-    ...                         Primary_Loan_Purpose=${data7["Primary Loan Purpose"]}
-    ...                         Application_Method=${data7["Application Method"]}
-    ...                         Method_of_Doc_Prep=${data7["Method of Doc Prep"]}
-    ...                         Prepayment_Penalty_Description=${data7["Prepayment Penalty Description"]}
-    ...                         Secondary_Source_of_Repayment=${data7["Secondary Source of Repayment"]}
-    ...                         Primary_Source_of_Repayment=${data7["Primary Source of Repayment"]}
-    ...                         Tertiary_Source_of_Repayment=${data7["Tertiary Source of Repayment"]}
-    ...                         Loan_Amount=${data7["Loan Amount"]}
-    ...                         User=${data7["User"]}
-    ...                         Role=${data7["Role"]}
+    ...                         Loan_Number=${Loan_Info["Loan Number"]}
+    ...                         Primary_Loan_Purpose=${Loan_Info["Primary Loan Purpose"]}
+    ...                         Application_Method=${Loan_Info["Application Method"]}
+    ...                         Method_of_Doc_Prep=${Loan_Info["Method of Doc Prep"]}
+    ...                         Prepayment_Penalty_Description=${Loan_Info["Prepayment Penalty Description"]}
+    ...                         Secondary_Source_of_Repayment=${Loan_Info["Secondary Source of Repayment"]}
+    ...                         Primary_Source_of_Repayment=${Loan_Info["Primary Source of Repayment"]}
+    ...                         Tertiary_Source_of_Repayment=${Loan_Info["Tertiary Source of Repayment"]}
+    ...                         Loan_Amount=${Loan_Info["Loan Amount"]}
+    ...                         User=${Loan_Info["User"]}
+    ...                         Role=${Loan_Info["Role"]}
 
-    ...                         Borrower_Type=${data8["Borrower Type"]}
-    ...                         Contingent_Type=${data8["Contingent Type"]}
-    ...                         Contingent_Amount=${data8["Contingent Amount"]}
+    ...                         Borrower_Type=${Entity_Inv["Borrower Type"]}
+    ...                         Contingent_Type=${Entity_Inv["Contingent Type"]}
+    ...                         Contingent_Amount=${Entity_Inv["Contingent Amount"]}
 
-    ...                         Type=${data9["Type"]}
-    ...                         Subtype=${data9["Subtype"]}
-    ...                         Value=${data9["Value"]}
-    ...                         Collateral_Name=${data9["Collateral Name"]}
-    ...                         City=${data9["City"]}
-    ...                         Description=${data9["Description"]}
+    ...                         Type=${Collateral["Type"]}
+    ...                         Subtype=${Collateral["Subtype"]}
+    ...                         Value=${Collateral["Value"]}
+    ...                         Collateral_Name=${Collateral["Collateral Name"]}
+    ...                         City=${Collateral["City"]}
+    ...                         Description=${Collateral["Description"]}
 
-    ...                         Fee_Type1=${data10["Fee Type1"]}
-    ...                         Calculation_Type=${data10["Calculation Type"]}
-    ...                         Percentage=${data10["Percentage"]}
-    ...                         Fee_Paid_By=${data10["Fee Paid By"]}
-    ...                         Basis_Source=${data10["Basis Source"]}
-    ...                         Amount=${data10["Amount"]}
-    ...                         Collection_Method=${data10["Collection Method"]}
-    ...                         Fee_Type2=${data10["Fee Type2"]}
+    ...                         Fee_Type1=${Fee["Fee Type1"]}
+    ...                         Calculation_Type=${Fee["Calculation Type"]}
+    ...                         Percentage=${Fee["Percentage"]}
+    ...                         Fee_Paid_By=${Fee["Fee Paid By"]}
+    ...                         Basis_Source=${Fee["Basis Source"]}
+    ...                         Amount=${Fee["Amount"]}
+    ...                         Collection_Method=${Fee["Collection Method"]}
+    ...                         Fee_Type2=${Fee["Fee Type2"]}
 
-    ...                         templates-list=${data11["templates-list"]}
+    ...                         templates-list=${Risk_R["templates-list"]}
 
-    ...                         CategoryCov=${data12["CategoryCov"]}
-    ...                         Covenant_Type=${data12["Covenant Type"]}
-    ...                         Effective_Date=${data12["Effective Date"]}
-    ...                         Frequency_Template=${data12["Frequency Template"]}
-    ...                         Grace_Days=${data12["Grace Days"]}
+    ...                         CategoryCov=${Covenant["CategoryCov"]}
+    ...                         Covenant_Type=${Covenant["Covenant Type"]}
+    ...                         Effective_Date=${Covenant["Effective Date"]}
+    ...                         Frequency_Template=${Covenant["Frequency Template"]}
+    ...                         Grace_Days=${Covenant["Grace Days"]}
 
-    ...                         Total_Borrower_Exposure=${data13["Total Borrower Exposure"]}
-    ...                         Total_Obligor_Exposure=${data13["Total Obligor Exposure"]}
-    ...                         Unused=${data13["Unused"]}
-    ...                         Outstanding=${data13["Outstanding"]}
-    ...                         Total_Credit_Exposur=${data13["Total Credit Exposur"]}
-    ...                         New_Money=${data13["New Money"]}
-    ...                         Approval_Committee=${data13["Approval Committee"]}
-    ...                         Parent_Household=${data13["Parent Household"]}
+    ...                         Total_Borrower_Exposure=${Product_Pac["Total Borrower Exposure"]}
+    ...                         Total_Obligor_Exposure=${Product_Pac["Total Obligor Exposure"]}
+    ...                         Unused=${Product_Pac["Unused"]}
+    ...                         Outstanding=${Product_Pac["Outstanding"]}
+    ...                         Total_Credit_Exposur=${Product_Pac["Total Credit Exposur"]}
+    ...                         New_Money=${Product_Pac["New Money"]}
+    ...                         Approval_Committee=${Product_Pac["Approval Committee"]}
+    ...                         Parent_Household=${Product_Pac["Parent Household"]}
 
-    ...                         Category=${data14["Category"]}
-    ...                         Document_Placeholder_Name=${data14["Document Placeholder Name"]}
-    ...                         Year=${data14["Year"]}
+    ...                         Category=${Doc_Man["Category"]}
+    ...                         Document_Placeholder_Name=${Doc_Man["Document Placeholder Name"]}
+    ...                         Year=${Doc_Man["Year"]}
 
-    ...                         Question1=${data15["Is the loan or line of credit secured by a lien on a dwelling"]}
-    ...                         Question2=${data15["Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)"]}
-    ...                         Question3=${data15["I certify that this loan IS NOT HMDA Reportable."]}
-    ...                         Question4=${data15["Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?"]}
-    ...                         Question5=${data15["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan"."]}
-    ...                         Question6=${data15["I certify this loan has been marked as "Reg O Reportable"."]}
-    ...                         HMDA_Record_Type=${data15["HMDA Record Type"]}
+    ...                         Question1=${Compliance["Is the loan or line of credit secured by a lien on a dwelling"]}
+    ...                         Question2=${Compliance["Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)"]}
+    ...                         Question3=${Compliance["I certify that this loan IS NOT HMDA Reportable."]}
+    ...                         Question4=${Compliance["Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?"]}
+    ...                         Question5=${Compliance["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan"."]}
+    ...                         Question6=${Compliance["I certify this loan has been marked as "Reg O Reportable"."]}
+    ...                         HMDA_Record_Type=${Compliance["HMDA Record Type"]}
 
 
     [Return]                    ${RelationshipData}
