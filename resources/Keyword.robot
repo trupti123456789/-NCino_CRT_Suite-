@@ -113,7 +113,10 @@ Data
 
     [Return]                    ${RelationshipData}
 
+Verify LOS Stage Using VerifyElement
+    [Arguments]    ${stage}
 
+    VerifyElement        //span[@class\='current slds-path__stage']//following::span[text()\='${stage}']    20
 Adding Relationships for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
     [Arguments]                 ${RelationshipData}
