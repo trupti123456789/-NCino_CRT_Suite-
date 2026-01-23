@@ -15,7 +15,7 @@ ${secret}                       EXPK7N6N4MKSBFCHF3MMN2F6BP6YHVCG
 *** Keywords ***
 Setup Browser   
    Set Library Search Order                          QForce    QWeb
-    Open Browser                about:blank                 ${BROWSER}     prefs=download.prompt_for_download: False, plugins.always_open_pdf_externally: True
+    Open Browser                about:blank                 ${BROWSER}     prefs=download.prompt_for_download: False, plugins.always_open_pdf_externally:True
     SetConfig                   LineBreak                   ${EMPTY}                    #\ue000
     SetConfig                   DefaultTimeout              45s                         #sometimes salesforce is slow
     SetConfig                   Delay                       0.3
@@ -61,5 +61,7 @@ Get File Path Based on Mode
     END
     RETURN   ${File}    
 Change Stage
-   ClickText                   Loans
+  
+    ClickText                   Loans
+
     Clicktext                   Mark as Current Stage
