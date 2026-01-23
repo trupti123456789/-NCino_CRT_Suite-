@@ -13,7 +13,7 @@ Suite Teardown                  End Suite
 
 
 *** Keywords ***
-    ${RelationshipData}=  Data
+    ${RelationshipData}=        Data
 
 Adding Business Relationship for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
@@ -60,7 +60,7 @@ Create a new Loan for nCino application method and verify LOS Stage
     TypeText                    Loan Purpose                ${RelationshipData["Loan_Purpose"]}
     ClickText                   Create New Loan
     Run Keyword                 Wait
-    Verify LOS Stage Using VerifyElement    Qualification                    
+    Verify LOS Stage Using VerifyElement                    Qualification
 
 Configure the Product Package Details and Assign Loan Officer to Loan Team
     [Arguments]                 ${RelationshipData}
@@ -83,7 +83,7 @@ Configure the Product Package Details and Assign Loan Officer to Loan Team
     TypeText                    New Money                   ${RelationshipData["New_Money"]}
     ClickText                   Save
     Run Keyword                 Wait
-    
+
 Update Loan Information, Pricing Required fields and Rate and Payment Structure
     [Arguments]                 ${RelationshipData}
     Clicktext                   Loans
@@ -189,7 +189,7 @@ Verify the Exposer and create the debts
 
 Add Entity Involvement by adding Co-Borrowers/Guarantors to the Borrowing Structure and add Authorized Signers  
     [Arguments]                 ${RelationshipData}
-     Clicktext                   Loans
+    Clicktext                   Loans
     Clicktext                   ${Business_User_name}
     Run Keyword                 Wait
     Clicktext                   Borrowing Structure
@@ -245,11 +245,11 @@ Add the Origination Fee
     DropDown                    Collection Method           ${RelationshipData["Collection_Method"]}
     ClickText                   Save
     Run Keyword                 Wait
-    ClickText                   Continue    
-     
+    ClickText                   Continue
+
 Generate the Product Package Credit Memo and update Deal Summary and Relationship Narrative
     [Arguments]                 ${RelationshipData}
-     Clicktext                   Product Package
+    Clicktext                   Product Package
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Magic Wand
     Clicktext                   Generate Credit Memo
@@ -268,12 +268,12 @@ Generate the Product Package Credit Memo and update Deal Summary and Relationshi
     Back
 
 Change the loan stege from Qualification to Proposal
-    [Arguments]                 ${RelationshipData}    ${stage}
+    [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement    Proposal
+    Verify LOS Stage Using VerifyElement                    Proposal
 
 Generate Term Sheet via Generate Forms in the Loan Magic Wand
     [Arguments]                 ${RelationshipData}
@@ -283,7 +283,7 @@ Generate Term Sheet via Generate Forms in the Loan Magic Wand
     ClickText                   Generate Forms
     ClickText                   Generate
     Run Keyword                 Wait
-    ${Dfile_path}=             Verify File Download        timeout=30
+    ${Dfile_path}=              Verify File Download        timeout=30
 
 Add Team Member in Loan   
     [Arguments]                 ${RelationshipData}
@@ -305,12 +305,12 @@ Add Team Member in Loan
     Run Keyword                 Wait
 
 Change the loan stege from Proposal to Credit Underwriting
-      [Arguments]                 ${RelationshipData}    ${stage}
+    [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement    Credit Underwriting
+    Verify LOS Stage Using VerifyElement                    Credit Underwriting
 
 Verify and Review Household and Relationship Connection
     [Arguments]                 ${RelationshipData}
@@ -329,7 +329,7 @@ Verify and Review Household and Relationship Connection
 
 Perform Spreads 
     [Arguments]                 ${RelationshipData}
-    
+
 Create Risk Rating in Loan 
     [Arguments]                 ${RelationshipData}
     ClickText                   Loans
@@ -372,22 +372,22 @@ Verify Covenant in loan
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
 
 On Product Package, assign Approver(s) and add Household Relationship
-   [Arguments]                 ${RelationshipData}
+    [Arguments]                 ${RelationshipData}
     Clicktext                   Product Package
     Clicktext                   ${Business_User_name}       partial_match=True
     VerifyText                  Items required to submit for approval:
     Verifytext                  Package Information
-   Clicktext                   Assign Approvers            partial_match=False         anchor=Product Package Details
+    Clicktext                   Assign Approvers            partial_match=False         anchor=Product Package Details
     Run Keyword                 Wait
-    Verifytext                  Level 1 Approval           
+    Verifytext                  Level 1 Approval
     Clickelement                xpath=//label[text()='Approver 1']//following::lightning-helptext//following-sibling::div//input
-    Clicktext                   ${RelationshipData["User"]}                            anchor=Approver 1
-      Verifytext                  Level 2 Approval                         
+    Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 1
+    Verifytext                  Level 2 Approval
     Clickelement                xpath=//label[text()='Approver 2']//following::lightning-helptext//following-sibling::div//input
-    Clicktext                   ${RelationshipData["User"]}                anchor=Approver 2
-      Verifytext                  Level 3 Approval                            
+    Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 2
+    Verifytext                  Level 3 Approval
     Clickelement                xpath=//label[text()='Approval Committee']//parent::span//following-sibling::div/lightning-base-combobox//button
-    Clicktext                   ${RelationshipData["Approval_Committee"]}              anchor=Approver 3
+    Clicktext                   ${RelationshipData["Approval_Committee"]}               anchor=Approver 3
     Clicktext                   Save                        anchor=Cancel
     Run Keyword                 Wait
 
@@ -413,12 +413,12 @@ Configure Document Manager
     Verifytext                  ${RelationshipData["Category"]}
 
 Change the loan stege from Credit Underwriting to 
-      [Arguments]                 ${RelationshipData}    ${stage}
+    [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement    Final Review
+    Verify LOS Stage Using VerifyElement                    Final Review
 
 Dealing with Loan Facilities
 
@@ -441,14 +441,14 @@ Loan submit for Approval
     VerifyText                  Product Package Approval Process
     ClickText                   Back to Product Package
     VerifyText                  This Product Package is currently pending approval and locked for any edits
-     
+
 Change the loan stege Final Review to Approval
-        [Arguments]                 ${RelationshipData}    ${stage}
+    [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement   Approval / Loan Committee  
+    Verify LOS Stage Using VerifyElement                    Approval / Loan Committee
 
 Loan Approver by assign User   
     [Arguments]                 ${RelationshipData}
@@ -481,11 +481,11 @@ Update the Origination Fee
     TypeText                    Amount                      ${RelationshipData["Amount"]}
     DropDown                    Collection Method           ${RelationshipData["Collection_Method"]}
     ClickText                   Save
-    Run Keyword                 Wait  
-     
+    Run Keyword                 Wait
+
 Regenerate Credit Memo with approval details 
-     [Arguments]                 ${RelationshipData}
-     Clicktext                   Product Package
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Product Package
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Magic Wand
     Clicktext                   Generate Credit Memo
@@ -510,34 +510,34 @@ Complete/Review HMDA and CRA Reporting
     Clicktext                   Compliance
     Run Keyword                 Wait
     Clicktext                   HMDA Eligibility
-    DropDown                     Is the loan or line of credit secured by a lien on a dwelling?            Yes
-    DropDown                     Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)            Yes
-    DropDown                      I certify that this loan IS NOT HMDA Reportable.                            No
-    ClickText                     Continue
-     DropDown    Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?    No
-    DropDown    If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan".    No
-    DropDown    I certify this loan has been marked as "Reg O Reportable".    No
-    ClickText    Continue
-    ClickText    Continue
-    ClickText    Continue
-    sleep        3
-    DropDown                      Is this loan HMDA reportable?                            Yes
-    ClickText    Continue
-    ClickText    Edit: HMDA Record Type
-    ClickText    --None--    anchor=HMDA Record Type
-    ClickText    HMDA-Effective-2017    anchor=Skip to Navigation
-    ClickText    Save
+    DropDown                    Is the loan or line of credit secured by a lien on a dwelling?                      ${RelationshipData["Question1"]}
+    DropDown                    Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)    ${RelationshipData["Question2"]}
+    DropDown                    I certify that this loan IS NOT HMDA Reportable.        ${RelationshipData["Question3"]}
+    ClickText                   Continue
+    DropDown                    Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?    ${RelationshipData["Question4"]}
+    DropDown                    If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan".    ${RelationshipData["Question5"]}
+    DropDown                    I certify this loan has been marked as "Reg O Reportable".                          ${RelationshipData["Question6"]}
+    ClickText                   Continue
+    ClickText                   Continue
+    ClickText                   Continue
+    sleep                       3
+    DropDown                    Is this loan HMDA reportable?                           ${RelationshipData["Question1"]}
+    ClickText                   Continue
+    ClickText                   Edit: HMDA Record Type
+    ClickText                   --None--                    anchor=HMDA Record Type
+    ClickText                   ${RelationshipData["HMDA_Record_Type"]}                 anchor=Skip to Navigation
+    ClickText                   Save
 
 
 Change the loan stege from Approval to Processing
-        [Arguments]                 ${RelationshipData}    ${stage}
+    [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement   Processing   
+    Verify LOS Stage Using VerifyElement                    Processing
 
-  
+
 
 
 
