@@ -70,7 +70,7 @@ Configure the Product Package Details and Assign Loan Officer to Loan Team
     Verifytext                  Package Information
     ClickText                   Edit: Household
     Clickelement                xpath=//label[text()='Household']//following::lightning-helptext//following-sibling::div//input
-    ClickText                   ${RelationshipData["Parent Household"]}
+    ClickText                   ${RelationshipData["Parent_Household"]}
     Clickelement                xpath=//label[text()='Primary Officer']//following-sibling::div//input
     Clicktext                   ${RelationshipData["User"]}
     Clickelement                xpath=//label[text()='Secondary Officer']//following-sibling::div//input
@@ -113,23 +113,6 @@ Update Loan Information, Pricing Required fields and Rate and Payment Structure
     VerifyAll                   Loan Information from Details,Loan Calculated Fields
     ClickText                   Continue
 
-
-Add Entity Involvement by adding Co-Borrowers/Guarantors to the Borrowing Structure and add Authorized Signers  
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Add Entity Involvement
-    UseModal                    On
-    ClickCheckbox               Select ${Household_User_name}                           on                          partial_match=false
-    ClickCheckbox               Select all                  on
-    Run Keyword                 Wait
-    ClickText                   Add Selected Relationships
-    UseModal                    On
-    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
-    DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
-    ClickText                   *Contingent Amount
-    TypeText                    *Contingent Amount          ${RelationshipData["Contingent_Amount"]}                delay=5
-    ClickText                   Save Entity Involvement
-    Run Keyword                 Wait
-    ClickText                   Continue
 
 Create Household and Relationship Connections
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
@@ -204,6 +187,28 @@ Verify the Exposer and create the debts
     Sleep                       20
     VerifyText                  Total Exposure Summary
 
+Add Entity Involvement by adding Co-Borrowers/Guarantors to the Borrowing Structure and add Authorized Signers  
+    [Arguments]                 ${RelationshipData}
+     Clicktext                   Loans
+    Clicktext                   ${Business_User_name}
+    Run Keyword                 Wait
+    Clicktext                   Borrowing Structure
+    Sleep                       3
+    ClickText                   Add Entity Involvement
+    UseModal                    On
+    ClickCheckbox               Select ${Household_User_name}                           on                          partial_match=false
+    ClickCheckbox               Select all                  on
+    Run Keyword                 Wait
+    ClickText                   Add Selected Relationships
+    UseModal                    On
+    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
+    DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
+    ClickText                   *Contingent Amount
+    TypeText                    *Contingent Amount          ${RelationshipData["Contingent_Amount"]}                delay=5
+    ClickText                   Save Entity Involvement
+    Run Keyword                 Wait
+    ClickText                   Continue
+
 Add Collateral with Collateral Ownership in Loan
     [Arguments]                 ${RelationshipData}
     ClickText                   Add Collateral
@@ -231,7 +236,7 @@ Add the Origination Fee
     [Arguments]                 ${RelationshipData}
     ClickText                   Add Fee
     ClickText                   Add Non-Standard Fee
-    DropDown                    Fee Type                    ${RelationshipData["Fee_Type"]}
+    DropDown                    Fee Type                    ${RelationshipData["Fee_Type1"]}
     DropDown                    Calculation Type            ${RelationshipData["Calculation_Type"]}
     TypeText                    Percentage                  ${RelationshipData["Percentage"]}
     DropDown                    Fee Paid By                 ${RelationshipData["Fee_Paid_By"]}
@@ -244,8 +249,10 @@ Add the Origination Fee
      
 Generate the Product Package Credit Memo and update Deal Summary and Relationship Narrative
     [Arguments]                 ${RelationshipData}
+     Clicktext                   Product Package
+    Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Magic Wand
-    Clicktext                   Generate                    Credit Memo
+    Clicktext                   Generate Credit Memo
     Run Keyword                 Wait
     Verifytext                  Generate Form
     Clicktext                   Generate
@@ -262,7 +269,10 @@ Generate the Product Package Credit Memo and update Deal Summary and Relationshi
 
 Change the loan stege from Qualification to Proposal
     [Arguments]                 ${RelationshipData}    ${stage}
-    Change Stage
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
     Verify LOS Stage Using VerifyElement    Proposal
 
 Generate Term Sheet via Generate Forms in the Loan Magic Wand
@@ -273,10 +283,14 @@ Generate Term Sheet via Generate Forms in the Loan Magic Wand
     ClickText                   Generate Forms
     ClickText                   Generate
     Run Keyword                 Wait
-    # ${file_path}=             Verify File Download        timeout=30
+    ${Dfile_path}=             Verify File Download        timeout=30
 
 Add Team Member in Loan   
     [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
+    Clicktext                   Loan Team
+    Verifytext                  Team Members
     ClickText                   Add New
     UseModal                    On
     ClickText                   Role
@@ -291,8 +305,11 @@ Add Team Member in Loan
     Run Keyword                 Wait
 
 Change the loan stege from Proposal to Credit Underwriting
-     [Arguments]                 ${RelationshipData}    ${stage}
-    Change Stage
+      [Arguments]                 ${RelationshipData}    ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
     Verify LOS Stage Using VerifyElement    Credit Underwriting
 
 Verify and Review Household and Relationship Connection
@@ -315,6 +332,8 @@ Perform Spreads
     
 Create Risk Rating in Loan 
     [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
     ClickText                   Create Risk Rating
     ClickElement                xpath=//select[@id="accounts-list"]
     DropDown                    accounts-list               ${Business_User_name} - Corporation                     partial_match=False
@@ -360,12 +379,15 @@ On Product Package, assign Approver(s) and add Household Relationship
     Verifytext                  Package Information
    Clicktext                   Assign Approvers            partial_match=False         anchor=Product Package Details
     Run Keyword                 Wait
+    Verifytext                  Level 1 Approval           
     Clickelement                xpath=//label[text()='Approver 1']//following::lightning-helptext//following-sibling::div//input
-    Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 1
+    Clicktext                   ${RelationshipData["User"]}                            anchor=Approver 1
+      Verifytext                  Level 2 Approval                         
     Clickelement                xpath=//label[text()='Approver 2']//following::lightning-helptext//following-sibling::div//input
-    Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 2
+    Clicktext                   ${RelationshipData["User"]}                anchor=Approver 2
+      Verifytext                  Level 3 Approval                            
     Clickelement                xpath=//label[text()='Approval Committee']//parent::span//following-sibling::div/lightning-base-combobox//button
-    Clicktext                   ${RelationshipData["Approval_Committee"]}
+    Clicktext                   ${RelationshipData["Approval_Committee"]}              anchor=Approver 3
     Clicktext                   Save                        anchor=Cancel
     Run Keyword                 Wait
 
@@ -390,8 +412,13 @@ Configure Document Manager
     Verifytext                  ${RelationshipData["Document_Placeholder_Name"]}
     Verifytext                  ${RelationshipData["Category"]}
 
-Change the loan stege from Proposal to Credit Underwriting
-    Change Stage
+Change the loan stege from Credit Underwriting to 
+      [Arguments]                 ${RelationshipData}    ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement    Final Review
 
 Dealing with Loan Facilities
 
@@ -407,10 +434,6 @@ Dealing with Loan Facilities
     Refreshpage
     VerifyElementText           //p[text()\='Number of Reviewable Loan Facilities']/following::lightning-formatted-number[1]    1
 
-Change the loan stege from Credit Underwriting to Final Review
-    Change Stage
-
-
 Loan submit for Approval
     [Arguments]                 ${RelationshipData}
     Clicktext                   Magic Wand
@@ -419,6 +442,13 @@ Loan submit for Approval
     ClickText                   Back to Product Package
     VerifyText                  This Product Package is currently pending approval and locked for any edits
      
+Change the loan stege Final Review to Approval
+        [Arguments]                 ${RelationshipData}    ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement   Approval / Loan Committee  
 
 Loan Approver by assign User   
     [Arguments]                 ${RelationshipData}
@@ -437,12 +467,77 @@ Loan Approver by assign User
     ClickText                   Approve                     partial_match=False
 
 
-Change the loan stege Final Review to Approval
-     [Arguments]                 ${RelationshipData}    ${stage}
-    Change Stage
-    Verify LOS Stage Using VerifyElement   Approval / Loan Committee   
+Change the loan stege from Approval to Processing
+        [Arguments]                 ${RelationshipData}    ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement   Processing
 
+Update the Origination Fee
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Fees
+    Clicktext                   Add Fee
+    ClickText                   Add Non-Standard Fee
+    DropDown                    Fee Type                    ${RelationshipData["Fee_Type2"]}
+    DropDown                    Calculation Type            ${RelationshipData["Calculation_Type"]}
+    TypeText                    Percentage                  ${RelationshipData["Percentage"]}
+    DropDown                    Fee Paid By                 ${RelationshipData["Fee_Paid_By"]}
+    DropDown                    Basis Source                ${RelationshipData["Basis_Source"]}
+    TypeText                    Amount                      ${RelationshipData["Amount"]}
+    DropDown                    Collection Method           ${RelationshipData["Collection_Method"]}
+    ClickText                   Save
+    Run Keyword                 Wait  
+     
+Regenerate Credit Memo with approval details 
+     [Arguments]                 ${RelationshipData}
+     Clicktext                   Product Package
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Magic Wand
+    Clicktext                   Generate Credit Memo
+    Run Keyword                 Wait
+    Verifytext                  Generate Form
+    Clicktext                   Generate
+    QVision.Clicktext           Save to Document Manager    delay=20
+    ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    VerifyText                  Save To Placeholder
+    UploadFile                  Upload                      ${file_path}
+    Run Keyword                 Wait
+    QVision.Clicktext           Placeholder
+    QVision.Clicktext           ${RelationshipData["Document_Placeholder_Name"]}
+    ClickText                   Save
+    Back
 
+Complete/Review HMDA and CRA Reporting
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
+    Clicktext                   Compliance
+    Run Keyword                 Wait
+    Clicktext                   HMDA Eligibility
+    DropDown                     Is the loan or line of credit secured by a lien on a dwelling?            Yes
+    DropDown                     Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)            Yes
+    DropDown                      I certify that this loan IS NOT HMDA Reportable.                            No
+    ClickText                     Continue
+     DropDown    Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?    No
+    DropDown    If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan".    No
+    DropDown    I certify this loan has been marked as "Reg O Reportable".    No
+    ClickText    Continue
+    ClickText    Continue
+    ClickText    Continue
+    sleep        3
+    DropDown                      Is this loan HMDA reportable?                            Yes
+    ClickText    Continue
+    ClickText    Edit: HMDA Record Type
+    ClickText    --None--    anchor=HMDA Record Type
+    ClickText    HMDA-Effective-2017    anchor=Skip to Navigation
+    ClickText    Save
+
+   
+
+  
 
 
 
