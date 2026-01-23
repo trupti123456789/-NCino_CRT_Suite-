@@ -15,11 +15,125 @@ Suite Teardown                  End Suite
 *** Keywords ***
     ${RelationshipData}=  Data
 
-Adding Relationships for Customer Onboarding
+Adding Business Relationship for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
     [Arguments]                 ${RelationshipData}
     Home
     LaunchApp                   Relationships
+    ClickText                   Relationships               partial_match=False
+    ClickText                   New                         anchor=Import               partial_match=False
+    Run Keyword                 Wait
+    Use Modal                   On
+    ClickText                   BusinessSelect "Business" to add a Corporation, Partnership, or other business relationship type.
+    Run Keyword                 Wait
+    ClickText                   Next
+    ${Business_User_name}=      Generate Unique Name        ${RelationshipData["Name1"]}
+    Set Suite Variable          ${Business_User_name}
+    TypeText                    Relationship Name           ${Business_User_name}
+    Picklist                    Type                        ${RelationshipData["Type1"]}
+    ClickText                   Save                        partial_match=False
+
+Create a Product package for Business Account
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Relationships
+    ClickText                   ${Business_User_name}
+    Clicktext                   New Product Package         anchor=Edit
+    ClickText                   Save
+    ClickText                   Cancel
+    ClickText                   Product Package Details
+    VerifyText                  ${Business_User_name}
+    ClickText                   Edit: Description
+    TypeText                    Description                 Test
+    ClickText                   Save
+
+Create a new Loan for nCino application method and verify LOS Stage
+    [Arguments]                 ${RelationshipData} ${stage}
+    ClickText                   Loan Facilities
+    ClickText                   Magic Wand: Tools and Actions
+    ClickText                   New Facility
+    VerifyText                  Add New Loan
+    DropDown                    Product Line                ${RelationshipData["Product_Line"]}
+    DropDown                    Product Type                ${RelationshipData["Product_Type"]}
+    DropDown                    * Product                   ${RelationshipData["Product"]}
+    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
+    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount"]}
+    TypeText                    Loan Purpose                ${RelationshipData["Loan_Purpose"]}
+    ClickText                   Create New Loan
+    Run Keyword                 Wait
+    Verify LOS Stage Using VerifyElement    Qualification                    
+
+Configure the Product Package Details and Assign Loan Officer to Loan Team
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Product Package
+    Clicktext                   ${Business_User_name}       partial_match=True
+    VerifyText                  Items required to submit for approval:
+    Verifytext                  Package Information
+    ClickText                   Edit: Household
+    Clickelement                xpath=//label[text()='Household']//following::lightning-helptext//following-sibling::div//input
+    ClickText                   ${RelationshipData["Parent Household"]}
+    Clickelement                xpath=//label[text()='Primary Officer']//following-sibling::div//input
+    Clicktext                   ${RelationshipData["User"]}
+    Clickelement                xpath=//label[text()='Secondary Officer']//following-sibling::div//input
+    Clicktext                   ${RelationshipData["User"]}
+    TypeText                    Total Borrower Exposure     ${RelationshipData["Total_Borrower_Exposure"]}
+    TypeText                    Total Obligor Exposure      ${RelationshipData["Total_Obligor_Exposure"]}
+    TypeText                    Unused                      ${RelationshipData["Unused"]}
+    TypeText                    Outstanding                 ${RelationshipData["Outstanding"]}
+    TypeText                    Total Credit Exposure       ${RelationshipData["Total_Credit_Exposur"]}
+    TypeText                    New Money                   ${RelationshipData["New_Money"]}
+    ClickText                   Save
+    Run Keyword                 Wait
+    
+Update Loan Information, Pricing Required fields and Rate and Payment Structure
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Loans
+    Clicktext                   ${Business_User_name}
+    Run Keyword                 Wait
+    ClickText                   Loan Information
+    VerifyText                  Loan Details
+    TypeText                    Loan Number                 ${RelationshipData["Loan_Number"]}
+    ClickText                   --None--                    anchor=Primary Loan Purpose
+    ClickText                   ${RelationshipData["Primary_Loan_Purpose"]}
+    ClickText                   --None--                    anchor=Application Method
+    ClickText                   ${RelationshipData["Application_Method"]}
+    ClickText                   --None--                    anchor=Method of Doc Prep
+    ClickText                   ${RelationshipData["Method_of_Doc_Prep"]}
+    ClickCheckbox               Is Participation            on
+    TypeText                    Prepayment Penalty Description                          ${RelationshipData["Prepayment_Penalty_Description"]}
+    ClickText                   --None--                    anchor=Secondary Source of Repayment
+    ClickText                   ${RelationshipData["Secondary_Source_of_Repayment"]}
+    ClickText                   --None--                    anchor=Primary Source of Repayment
+    ClickText                   ${RelationshipData["Primary_Source_of_Repayment"]}
+    ClickText                   --None--                    anchor=Tertiary Source of Repayment
+    ClickText                   ${RelationshipData["Tertiary_Source_of_Repayment"]}
+    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount"]}
+    ClickText                   Save
+    Run Keyword                 Wait
+    ClickText                   Loan Structuring
+    VerifyAll                   Loan Information from Details,Loan Calculated Fields
+    ClickText                   Continue
+
+
+Add Entity Involvement by adding Co-Borrowers/Guarantors to the Borrowing Structure and add Authorized Signers  
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Add Entity Involvement
+    UseModal                    On
+    ClickCheckbox               Select ${Household_User_name}                           on                          partial_match=false
+    ClickCheckbox               Select all                  on
+    Run Keyword                 Wait
+    ClickText                   Add Selected Relationships
+    UseModal                    On
+    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
+    DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
+    ClickText                   *Contingent Amount
+    TypeText                    *Contingent Amount          ${RelationshipData["Contingent_Amount"]}                delay=5
+    ClickText                   Save Entity Involvement
+    Run Keyword                 Wait
+    ClickText                   Continue
+
+Create Household and Relationship Connections
+    [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
+    [Arguments]                 ${RelationshipData}
     ClickText                   Relationships
     VerifyPageHeader            Relationships
     # Add a new household relationship
@@ -34,20 +148,6 @@ Adding Relationships for Customer Onboarding
     ClickText                   Save                        partial_match=False
     Run Keyword                 Wait
 
-    # Add a new business relationship
-    ClickText                   Relationships               partial_match=False
-    ClickText                   New                         anchor=Import               partial_match=False
-    Run Keyword                 Wait
-    Use Modal                   On
-    ClickText                   BusinessSelect "Business" to add a Corporation, Partnership, or other business relationship type.
-    Run Keyword                 Wait
-    ClickText                   Next
-    ${Business_User_name}=      Generate Unique Name        ${RelationshipData["Name1"]}
-    Set Suite Variable          ${Business_User_name}
-    TypeText                    Relationship Name           ${Business_User_name}
-    Picklist                    Type                        ${RelationshipData["Type1"]}
-    ClickText                   Save                        partial_match=False
-
     # Add a new individual relationship
     ClickText                   Relationships
     ClickText                   New                         anchor=Import               partial_match=False
@@ -61,21 +161,6 @@ Adding Relationships for Customer Onboarding
     TypeText                    Relationship Name           ${Individual_User_name}
     Picklist                    Type                        ${RelationshipData["Type2"]}
     ClickText                   Save                        partial_match=False
-
-Verify the Relationships  
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Relationships
-    VerifyText                  ${Individual_User_name}
-    VerifyText                  ${Business_User_name}
-    VerifyText                  ${Household_User_name}
-    ClickText                   ${Household_User_name}
-    VerifyField                 Relationship Type           ${RelationshipData["Type0"]}
-    ClickText                   Relationships
-    ClickText                   ${Business_User_name}
-    VerifyField                 Relationship Type           ${RelationshipData["Type1"]}
-    ClickText                   Relationships
-    ClickText                   ${Individual_User_name}
-    VerifyField                 Relationship Type           ${RelationshipData["Type2"]}
 
 Create a connection for the household relationship
     [Arguments]                 ${RelationshipData}
@@ -119,113 +204,7 @@ Verify the Exposer and create the debts
     Sleep                       20
     VerifyText                  Total Exposure Summary
 
-Create a Contact for Bussiness Account
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Relationships
-    ClickText                   ${Business_User_name}
-    ClickText                   Contacts                    anchor=Credit Actions
-    ClickText                   New                         partial_match=False
-    UseModal                    ON
-    PickList                    Salutation                  Mr.
-    TypeText                    Last Name                   ${RelationshipData["Contact"]}
-    ClickCheckbox               Primary Contact             on
-    ClickText                   Save                        partial_match=False
-    Run Keyword                 Wait
-Verifying contact creation
-    [Arguments]                 ${RelationshipData}
-    ClickText                   ${RelationshipData["Contact"]}
-    VerifyField                 Name                        Mr. ${RelationshipData["Contact"]}
-    VerifyField                 Relationship Name           ${Business_User_name}       partial_match=true
-    Verifytext                  Primary Contact
-
-
-Create a Product package for Business Account
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Relationships
-    ClickText                   ${Business_User_name}
-    Clicktext                   New Product Package         anchor=Edit
-    ClickText                   Save
-    ClickText                   Cancel
-    ClickText                   Product Package Details
-    VerifyText                  ${Business_User_name}
-    ClickText                   Edit: Description
-    TypeText                    Description                 Test
-    ClickText                   Save
-
-Create a new Loan
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Loan Facilities
-    ClickText                   Magic Wand: Tools and Actions
-    ClickText                   New Facility
-    VerifyText                  Add New Loan
-    DropDown                    Product Line                ${RelationshipData["Product_Line"]}
-    DropDown                    Product Type                ${RelationshipData["Product_Type"]}
-    DropDown                    * Product                   ${RelationshipData["Product"]}
-    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
-    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount"]}
-    TypeText                    Loan Purpose                ${RelationshipData["Loan_Purpose"]}
-    ClickText                   Create New Loan
-    Run Keyword                 Wait
-    ClickText                   Loan Information
-    VerifyText                  Loan Details
-
-Update Loan Information, Pricing Required fields and Rate and Payment Structure
-    [Arguments]                 ${RelationshipData}
-    TypeText                    Loan Number                 ${RelationshipData["Loan_Number"]}
-    ClickText                   --None--                    anchor=Primary Loan Purpose
-    ClickText                   ${RelationshipData["Primary_Loan_Purpose"]}
-    ClickText                   --None--                    anchor=Application Method
-    ClickText                   ${RelationshipData["Application_Method"]}
-    ClickText                   --None--                    anchor=Method of Doc Prep
-    ClickText                   ${RelationshipData["Method_of_Doc_Prep"]}
-    ClickCheckbox               Is Participation            on
-    TypeText                    Prepayment Penalty Description                          ${RelationshipData["Prepayment_Penalty_Description"]}
-    ClickText                   --None--                    anchor=Secondary Source of Repayment
-    ClickText                   ${RelationshipData["Secondary_Source_of_Repayment"]}
-    ClickText                   --None--                    anchor=Primary Source of Repayment
-    ClickText                   ${RelationshipData["Primary_Source_of_Repayment"]}
-    ClickText                   --None--                    anchor=Tertiary Source of Repayment
-    ClickText                   ${RelationshipData["Tertiary_Source_of_Repayment"]}
-    TypeText                    Loan Amount                 ${RelationshipData["Loan_Amount"]}
-    ClickText                   Save
-    Run Keyword                 Wait
-    ClickText                   Loan Structuring
-    VerifyAll                   Loan Information from Details,Loan Calculated Fields
-    ClickText                   Continue
-
-Add Team Member in Loan   
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Add New
-    UseModal                    On
-    ClickText                   Role
-    TypeText                    Role                        ${RelationshipData["Role"]}
-    ClickText                   ${RelationshipData["Role"]}
-    ClickText                   User
-    TypeText                    User                        ${RelationshipData["User"]}
-    ClickText                   ${RelationshipData["User"]}
-    ClickText                   Save                        partial_match=False
-    Run Keyword                 Wait
-    ClickText                   Continue
-    Run Keyword                 Wait
-
-Add Entity Involvement by adding Co-Borrowers/Guarantors to the Borrowing Structure and add Authorized Signers  
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Add Entity Involvement
-    UseModal                    On
-    ClickCheckbox               Select ${Household_User_name}                           on                          partial_match=false
-    ClickCheckbox               Select all                  on
-    Run Keyword                 Wait
-    ClickText                   Add Selected Relationships
-    UseModal                    On
-    DropDown                    Borrower Type               ${RelationshipData["Borrower_Type"]}
-    DropDown                    Contingent Type             ${RelationshipData["Contingent_Type"]}
-    ClickText                   *Contingent Amount
-    TypeText                    *Contingent Amount          ${RelationshipData["Contingent_Amount"]}                delay=5
-    ClickText                   Save Entity Involvement
-    Run Keyword                 Wait
-    ClickText                   Continue
-
-Add Collateral in Loan
+Add Collateral with Collateral Ownership in Loan
     [Arguments]                 ${RelationshipData}
     ClickText                   Add Collateral
     ClickText                   Add New Collateral
@@ -261,8 +240,79 @@ Add the Origination Fee
     DropDown                    Collection Method           ${RelationshipData["Collection_Method"]}
     ClickText                   Save
     Run Keyword                 Wait
-    ClickText                   Continue
+    ClickText                   Continue    
+     
+Generate the Product Package Credit Memo and update Deal Summary and Relationship Narrative
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Magic Wand
+    Clicktext                   Generate                    Credit Memo
+    Run Keyword                 Wait
+    Verifytext                  Generate Form
+    Clicktext                   Generate
+    QVision.Clicktext           Save to Document Manager    delay=20
+    ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    VerifyText                  Save To Placeholder
+    UploadFile                  Upload                      ${file_path}
+    Run Keyword                 Wait
+    QVision.Clicktext           Placeholder
+    QVision.Clicktext           ${RelationshipData["Document_Placeholder_Name"]}
+    ClickText                   Save
+    Back
 
+Change the loan stege from Qualification to Proposal
+    [Arguments]                 ${RelationshipData}    ${stage}
+    Change Stage
+    Verify LOS Stage Using VerifyElement    Proposal
+
+Generate Term Sheet via Generate Forms in the Loan Magic Wand
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
+    Clicktext                   Magic Wand
+    ClickText                   Generate Forms
+    ClickText                   Generate
+    Run Keyword                 Wait
+    # ${file_path}=             Verify File Download        timeout=30
+
+Add Team Member in Loan   
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Add New
+    UseModal                    On
+    ClickText                   Role
+    TypeText                    Role                        ${RelationshipData["Role"]}
+    ClickText                   ${RelationshipData["Role"]}
+    ClickText                   User
+    TypeText                    User                        ${RelationshipData["User"]}
+    ClickText                   ${RelationshipData["User"]}
+    ClickText                   Save                        partial_match=False
+    Run Keyword                 Wait
+    ClickText                   Continue
+    Run Keyword                 Wait
+
+Change the loan stege from Proposal to Credit Underwriting
+     [Arguments]                 ${RelationshipData}    ${stage}
+    Change Stage
+    Verify LOS Stage Using VerifyElement    Credit Underwriting
+
+Verify and Review Household and Relationship Connection
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Relationships
+    VerifyText                  ${Individual_User_name}
+    VerifyText                  ${Business_User_name}
+    VerifyText                  ${Household_User_name}
+    ClickText                   ${Household_User_name}
+    VerifyField                 Relationship Type           ${RelationshipData["Type0"]}
+    ClickText                   Relationships
+    ClickText                   ${Business_User_name}
+    VerifyField                 Relationship Type           ${RelationshipData["Type1"]}
+    ClickText                   Relationships
+    ClickText                   ${Individual_User_name}
+    VerifyField                 Relationship Type           ${RelationshipData["Type2"]}
+
+Perform Spreads 
+    [Arguments]                 ${RelationshipData}
+    
 Create Risk Rating in Loan 
     [Arguments]                 ${RelationshipData}
     ClickText                   Create Risk Rating
@@ -293,6 +343,7 @@ Add Covenants in Loan
     TypeText                    Grace Days                  ${RelationshipData["Grace_Days"]}
     ClickText                   Create                      partial_match=False
     Run Keyword                 Wait
+
 Verify Covenant in loan
     [Arguments]                 ${RelationshipData}
     Clicktext                   Covenants
@@ -301,29 +352,13 @@ Verify Covenant in loan
     Verifytext                  ${RelationshipData["CategoryCov"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
 
-Configure the Product Package Details and Assign Loan Officer to Loan Team
-    [Arguments]                 ${RelationshipData}
+On Product Package, assign Approver(s) and add Household Relationship
+   [Arguments]                 ${RelationshipData}
     Clicktext                   Product Package
     Clicktext                   ${Business_User_name}       partial_match=True
     VerifyText                  Items required to submit for approval:
     Verifytext                  Package Information
-
-    ClickText                   Edit: Household
-    Clickelement                xpath=//label[text()='Household']//following::lightning-helptext//following-sibling::div//input
-    ClickText                   ${RelationshipData["Parent Household"]}
-    Clickelement                xpath=//label[text()='Primary Officer']//following-sibling::div//input
-    Clicktext                   ${RelationshipData["User"]}
-    Clickelement                xpath=//label[text()='Secondary Officer']//following-sibling::div//input
-    Clicktext                   ${RelationshipData["User"]}
-    TypeText                    Total Borrower Exposure     ${RelationshipData["Total_Borrower_Exposure"]}
-    TypeText                    Total Obligor Exposure      ${RelationshipData["Total_Obligor_Exposure"]}
-    TypeText                    Unused                      ${RelationshipData["Unused"]}
-    TypeText                    Outstanding                 ${RelationshipData["Outstanding"]}
-    TypeText                    Total Credit Exposure       ${RelationshipData["Total_Credit_Exposur"]}
-    TypeText                    New Money                   ${RelationshipData["New_Money"]}
-    ClickText                   Save
-    Run Keyword                 Wait
-    Clicktext                   Assign Approvers            partial_match=False         anchor=Product Package Details
+   Clicktext                   Assign Approvers            partial_match=False         anchor=Product Package Details
     Run Keyword                 Wait
     Clickelement                xpath=//label[text()='Approver 1']//following::lightning-helptext//following-sibling::div//input
     Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 1
@@ -355,38 +390,6 @@ Configure Document Manager
     Verifytext                  ${RelationshipData["Document_Placeholder_Name"]}
     Verifytext                  ${RelationshipData["Category"]}
 
-
-
-
-Generate the Product Package Credit Memo and update Deal Summary and Relationship Narrative
-    [Arguments]                 ${RelationshipData}
-    Clicktext                   Magic Wand
-    Clicktext                   Generate                    Credit Memo
-    Run Keyword                 Wait
-    Verifytext                  Generate Form
-    Clicktext                   Generate
-    QVision.Clicktext           Save to Document Manager    delay=20
-    ${relative_path}            Set Variable                tests/../Data/PO.pdf
-    ${file_path}                Get File Path Based on Mode                             ${relative_path}
-    VerifyText                  Save To Placeholder
-    UploadFile                  Upload                      ${file_path}
-    Run Keyword                 Wait
-    QVision.Clicktext           Placeholder
-    QVision.Clicktext           ${RelationshipData["Document_Placeholder_Name"]}
-    ClickText                   Save
-    Back
-
-Change the loan stege from Qualification to Proposal
-    Change Stage
-Generate Commitment Letter via Generate Forms 
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Loans
-    ClickText                   ${Business_User_name}
-    Clicktext                   Magic Wand
-    ClickText                   Generate Forms
-    ClickText                   Generate
-    Run Keyword                 Wait
-    # ${file_path}=             Verify File Download        timeout=30
 Change the loan stege from Proposal to Credit Underwriting
     Change Stage
 
@@ -433,13 +436,12 @@ Loan Approver by assign User
     Run Keyword                 Wait
     ClickText                   Approve                     partial_match=False
 
-Change the loan stege from Final Review to Approval
-    Change Stage
 
-Configuring Loan
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Loans
-    ClickText                   ${Business_User_name}
+Change the loan stege Final Review to Approval
+     [Arguments]                 ${RelationshipData}    ${stage}
+    Change Stage
+    Verify LOS Stage Using VerifyElement   Approval / Loan Committee   
+
 
 
 
