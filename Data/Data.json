@@ -59,13 +59,14 @@
       "Description":"Loan for test"
     },
     "Fee": {
-      "Fee Type": "Appraisal",
+      "Fee Type1": "Appraisal",
       "Calculation Type": "Percentage",
       "Percentage": 79,
       "Fee Paid By": "Bank Paid",
       "Basis Source": "Loan Amount",
       "Amount": 7900000,
-      "Collection Method": "Financed"
+      "Collection Method": "Financed",
+      "Fee Type2":"Attorney"
    },
    "RiskRating":{
      "templates-list":"Commercial Real Estate"
@@ -91,5 +92,14 @@
      "Category":"Approval Documents",
      "Document Placeholder Name":"Credit Memo",
      "Year":2026
-   }
+   },
+    "Compliance":{
+      "Is the loan or line of credit secured by a lien on a dwelling?":"Yes",
+      "Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)":"Yes",
+      "I certify that this loan IS NOT HMDA Reportable.":"No",
+      "Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?":"No",
+      "If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan".":"No",
+      "I certify this loan has been marked as "Reg O Reportable".":"No",
+      "HMDA Record Type":"HMDA-Effective-2017"
+    }
 }
