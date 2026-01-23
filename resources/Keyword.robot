@@ -5,7 +5,7 @@ Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
 Library                         OperatingSystem
-Library                        SeleniumLibrary
+Library                         SeleniumLibrary
 Library                         ../CustomLibrary/custom_upload_file.py
 Resource                        ../resources/common.robot
 Suite Setup                     Setup Browser
@@ -35,7 +35,7 @@ Data
     ${data12}=                  Set Variable                ${dataA["Covenant"]}
     ${data13}=                  Set Variable                ${dataA["Product Package"]}
     ${data14}=                  Set Variable                ${dataA["Document Manager"]}
-    ${data15}=                   Set Variable                ${dataA["Compliance"]}
+    ${data15}=                  Set Variable                ${dataA["Compliance"]}
     # Setting variables for relationship data
     ${RelationshipData}=        Create Dictionary
     ...                         Name=${data1["Relationship Name"]}
@@ -89,7 +89,7 @@ Data
     ...                         Basis_Source=${data10["Basis Source"]}
     ...                         Amount=${data10["Amount"]}
     ...                         Collection_Method=${data10["Collection Method"]}
-    ...                          Fee_Type2=${data10["Fee Type2"]}
+    ...                         Fee_Type2=${data10["Fee Type2"]}
 
     ...                         templates-list=${data11["templates-list"]}
 
@@ -111,22 +111,22 @@ Data
     ...                         Category=${data14["Category"]}
     ...                         Document_Placeholder_Name=${data14["Document Placeholder Name"]}
     ...                         Year=${data14["Year"]}
-     
-    ...                          Question1=${data15["Is the loan or line of credit secured by a lien on a dwelling"]}
-    ...                          Question2=${data15["Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)"]}
-    ...                           Question3=${data15["I certify that this loan IS NOT HMDA Reportable."]}
-    ...                           Question4=${data15["Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?"]}
-    ...                            Question5=${data15["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan"."]}
-    ...                            Question6=${data15["I certify this loan has been marked as "Reg O Reportable"."]}
-    ...                            HMDA_Record_Type=${data15["HMDA Record Type"]}
+
+    ...                         Question1=${data15["Is the loan or line of credit secured by a lien on a dwelling"]}
+    ...                         Question2=${data15["Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)"]}
+    ...                         Question3=${data15["I certify that this loan IS NOT HMDA Reportable."]}
+    ...                         Question4=${data15["Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?"]}
+    ...                         Question5=${data15["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan"."]}
+    ...                         Question6=${data15["I certify this loan has been marked as "Reg O Reportable"."]}
+    ...                         HMDA_Record_Type=${data15["HMDA Record Type"]}
 
 
     [Return]                    ${RelationshipData}
 
 Verify LOS Stage Using VerifyElement
-    [Arguments]    ${stage}
+    [Arguments]                 ${stage}
 
-    VerifyElement        //span[@class\='current slds-path__stage']//following::span[text()\='${stage}']    20
+    VerifyElement               //span[@class\='current slds-path__stage']//following::span[text()\='${stage}']     20
 Adding Relationships for Customer Onboarding
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
     [Arguments]                 ${RelationshipData}
@@ -540,9 +540,9 @@ Configuring Loan
     ClickText                   Loans
     ClickText                   ${Business_User_name}
     ${relative_path}            Set Variable                tests/../Data/PO.pdf
-    ${file_patha}                Get File Path Based on Mode                             ${relative_path}
-    Custom Upload File           ${file_patha} 
-   Choose File                   //input[@type="file"]
+    ${file_patha}               Get File Path Based on Mode                             ${relative_path}
+    Custom Upload File          ${file_patha}
+    Choose File                 //input[@type="file"]
 
 
 
