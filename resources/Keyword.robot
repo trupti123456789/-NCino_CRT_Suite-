@@ -5,7 +5,6 @@ Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
 Library                         QWeb
-
 Library                         ../CustomLIbrary/Selenium.py
 Library                         OperatingSystem
 Resource                        ../resources/common.robot
