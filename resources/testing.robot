@@ -15,7 +15,7 @@ Suite Teardown                  End Suite
 
 *** Test Cases *** 
 
-Adding Business Relationship for Customer Onboarding
+test
      [tags]                   nCinotest
     [Documentation]             appstate to go directly to nCino / Relationships and create Onboarding
     Home
@@ -25,4 +25,4 @@ Adding Business Relationship for Customer Onboarding
     Clicktext                   Borrower Financial Statement
     ${relative_path}            Set Variable                tests/../Data/PO.pdf
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
-  Selenium.Upload File Lightning                        locator=//button[normalize-space()='Upload File']  file_path=${file_path}
+  Upload File Lightning                        locator=//button[normalize-space()='Upload File']  file_path=${file_path}
