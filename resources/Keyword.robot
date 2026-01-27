@@ -539,8 +539,10 @@ Change the loan stege from Approval to Processing
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Processing
     Attach Driver
-    Choose File                 locator=//input[@name='files']                          file_path=${file_path}
-    Selenium.Upload File Lightning                          locator=//input[@name='files']                          file_path=${file_path}
+    Choose File  
+    ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}              
+    Upload File Lightning                          locator=//input[@name='files']                          file_path=${file_path}
     
 
 
