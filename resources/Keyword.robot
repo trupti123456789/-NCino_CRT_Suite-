@@ -1,9 +1,11 @@
 *** Settings ***
 Library                         QForce
+Library                        QWeb
 Library                         Collections
 Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
+#Library                        SeleniumLibrary
 Library                         OperatingSystem
 Resource                        ../resources/common.robot
 Resource                        ../resources/data.robot
@@ -536,8 +538,8 @@ Change the loan stege from Approval to Processing
     Clicktext                   Mark Stage as Complete
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Processing
-
-
+ 
+    Execute Javascript       document.querySelector('input[type="file"]').style.display='block';    Choose File    css:input[type="file"]     ${file_path}
 
 
 
