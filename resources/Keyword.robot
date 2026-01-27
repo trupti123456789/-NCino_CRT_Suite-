@@ -4,7 +4,7 @@ Library                         Collections
 Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
-Library                        QWeb
+Library                         QWeb
 
 Library                         ../CustomLIbrary/Selenium.py
 Library                         OperatingSystem
@@ -497,7 +497,9 @@ Regenerate Credit Memo with approval details
     Clicktext                   Generate
     QVision.Clicktext           Save to Document Manager    delay=20
     ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    Set Suite Variable          ${relative_path}
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Set Suite Variable          ${file_path}
     VerifyText                  Save To Placeholder
     UploadFile                  Upload                      ${file_path}
     Run Keyword                 Wait
@@ -539,18 +541,12 @@ Change the loan stege from Approval to Processing
     Clicktext                   Mark Stage as Complete
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Processing
- 
-   ${relative_path}            Set Variable                tests/../Data/PO.pdf
-    ${file_path}                Get File Path Based on Mode                             ${relative_path}
-  Selenium.Upload File Lightning                          locator=//input[@type='file']                           file_path=${file_path}
-  Selenium.Upload File Lightning                        locator=//button[normalize-space()='Upload File']  file_path=${file_path}
-  Upload File Lightning                         locator=//button[normalize-space()='Upload File']  file_path=${file_path}
-  Choose File                        locator=//input[@type='file']                           file_path=${file_path}
-   Upload File           locator=//input[@type='file']    file=${file_path}
-  UploadFile   //input[@type='file']    ${file_path}
-  QWeb.Upload File                       Add File       ${file_path}    anchor=Portal Options
-  clicktext                        More Options
 
+Document Manager Approval
+    [Arguments]                 ${RelationshipData}   ${relative_path}     ${file_path}  
+    Clicktext                   More Options
+    Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
+    QWeb.Upload File            Add File                    ${file_path}                anchor=Portal Options
 
 
 
