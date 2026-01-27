@@ -543,7 +543,8 @@ Change the loan stege from Approval to Processing
 
     ${JS}    Set Variable    document.querySelector('input[type="file"]').style.display='block';
     Execute Javascript    ${JS}
-   SeleniumLibrary.Wait Until Element Contains    xpath=//input[@type='file' and @name='files']    20s
+  Wait Until Element Contains    locator=//input[@type='file' and @name='files']    text=UploadFile
+
 
 
 
