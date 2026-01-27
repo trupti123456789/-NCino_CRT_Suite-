@@ -3,9 +3,9 @@ Library                         QForce
 Library                         Collections
 Library                         RequestsLibrary
 Library                         JSONLibrary
+Library                        QWeb
 Library                         QVision
-Library                        SeleniumLibrary
-Library                        ../CustomLIbrary/AttachBrowser.py
+Library                        ../CustomLIbrary/Selenium.py
 Library                         OperatingSystem
 Resource                        ../resources/common.robot
 Resource                        ../resources/data.robot
@@ -539,7 +539,8 @@ Change the loan stege from Approval to Processing
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Processing
     Attach Driver
-  Choose File                  locator=//input[@name='files']    file_path=${file_path} 
+  Choose File                  locator=//input[@name='files']    file_path=${file_path}
+  Upload File Lightning        locator=//input[@name='files']    file_path=${file_path}
 
 
 
