@@ -1,11 +1,11 @@
 *** Settings ***
 Library                         QForce
-Library                        QWeb
+
 Library                         Collections
 Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
-#Library                        SeleniumLibrary
+Library                        SeleniumLibrary
 Library                         OperatingSystem
 Resource                        ../resources/common.robot
 Resource                        ../resources/data.robot
@@ -543,7 +543,7 @@ Change the loan stege from Approval to Processing
 
     ${JS}    Set Variable    document.querySelector('input[type="file"]').style.display='block';
     Execute Javascript    ${JS}
-   SeleniumLibrary.Wait Until Element Contains    //input[@type='file' and @name='files']    20s
+   SeleniumLibrary.Wait Until Element Contains    xpath=//input[@type='file' and @name='files']    20s
 
 
 
