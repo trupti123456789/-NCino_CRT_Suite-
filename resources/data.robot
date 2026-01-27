@@ -113,8 +113,8 @@ Data
     ...                     Question2=${Compliance["Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)"]}
     ...                     Question3=${Compliance["I certify that this loan IS NOT HMDA Reportable."]}
     ...                     Question4=${Compliance["Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?"]}
-    ...                     Question5=${Compliance["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan"."]}
-    ...                     Question6=${Compliance["I certify this loan has been marked as "Reg O Reportable"."]}
+    ...                     Question5=${Compliance["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an \"Employee Loan\"."]}
+    ...                     Question6=${Compliance["I certify this loan has been marked as \"Reg O Reportable\"."]}
     ...                     HMDA_Record_Type=${Compliance["HMDA Record Type"]}
 
 
