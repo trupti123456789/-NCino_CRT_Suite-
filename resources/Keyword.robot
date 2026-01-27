@@ -548,7 +548,8 @@ Change the loan stege from Approval to Processing
   Choose File                        locator=//input[@type='file']                           file_path=${file_path}
    Upload File           locator=//input[@type='file']    file=${file_path}
   UploadFile   //input[@type='file']    ${file_path}
-  QWeb.Upload File                        Upload File            file=${file_path}
+  QWeb.Upload File                       Add File       ${file_path}    anchor=Portal Options
+  clicktext                        More Options
 
 
 
