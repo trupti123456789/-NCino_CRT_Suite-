@@ -4,7 +4,8 @@ Library                         Collections
 Library                         RequestsLibrary
 Library                         JSONLibrary
 Library                         QVision
-Library                        SeleniumLibrary
+Library                        QWeb
+
 Library                         ../CustomLIbrary/Selenium.py
 Library                         OperatingSystem
 Resource                        ../resources/common.robot
@@ -547,6 +548,7 @@ Change the loan stege from Approval to Processing
   Choose File                        locator=//input[@type='file']                           file_path=${file_path}
    Upload File           locator=//input[@type='file']    file=${file_path}
   UploadFile   //input[@type='file']    ${file_path}
+  QWeb.Upload File                        Upload File            file=${file_path}
 
 
 
