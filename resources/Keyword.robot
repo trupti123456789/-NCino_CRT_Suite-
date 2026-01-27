@@ -543,7 +543,7 @@ Change the loan stege from Approval to Processing
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
   Selenium.Upload File Lightning                          locator=//input[@type='file']                           file_path=${file_path}
   Selenium.Upload File Lightning                        locator=//button[normalize-space()='Upload File']  file_path=${file_path}
-
+  Upload File Lightning                         locator=//button[normalize-space()='Upload File']  file_path=${file_path}
 
 
 
