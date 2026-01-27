@@ -1,8 +1,12 @@
-# file: attach_selenium.py
-from robot.libraries.BuiltIn import BuiltIn
-from SeleniumLibrary import SeleniumLibrary
+from SeleniumLibrary.base import LibraryComponent, keyword
+import os
 
-def attach_driver():
-    qweb_driver = BuiltIn().get_library_instance("QWeb").driver
-    selib = BuiltIn().get_library_instance("SeleniumLibrary")
-    selib.register_driver(qweb_driver, "default")
+class selenium(LibraryComponent):
+
+    @keyword
+    def upload_file_lightning(self, locator, file_path):
+        if not os.path.exists(file_path):
+            raise Exception(f"File not found: {file_path}")
+
+        element = self.find_element(locator)
+        element.send_keys(file_path)
