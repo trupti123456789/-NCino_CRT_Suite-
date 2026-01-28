@@ -101,5 +101,15 @@
       "If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an \"Employee Loan\".":"No",
       "I certify this loan has been marked as \"Reg O Reportable\".":"No",
       "HMDA Record Type":"HMDA-Effective-2017"
+    },
+    "Amortization Structure":{
+      "Term Length":1,
+      "All-in Rate":5'
+      "Term Unit":"Quarters",
+      "Index":"1 mo - LIBOR (USD)",
+      "Spread":1,
+      "Payment Type":"Interest Only",
+      "Term Length":1,
+      "Payment Frequency":" Monthly"
     }
 }
