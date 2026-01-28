@@ -571,23 +571,25 @@ Rate and payment configuration
     UseModal                    ON
     ClickText                   Effective Date
     ClickText                   Today
-    TypeText                    Term Length                 1
-    TypeText                    All-in Rate                 5
+    TypeText                    Term Length                 ${RelationshipData["Term_Length"]}
+    TypeText                    All-in Rate                 ${RelationshipData["All-in-Rate"]}
     ClickText                   Term Unit
-    ClickText                   Quarters
+    ClickText                   ${RelationshipData["Term_Unit"]}
     ClickText                   Variable
     ClickText                   Index
-    ClickText                   1 mo - LIBOR (USD)
-    TypeText                    Spread                      1
+    ClickText                   ${RelationshipData["Index"]}
+    TypeText                    Spread                      ${RelationshipData["Spread"]}
     ClickText                   Repayment Structure
     ClickText                   Payment Type
-    ClickText                   Interest Only
-    TypeText                    Term Length                 1
+    ClickText                   ${RelationshipData["Payment_Type"]}
+    TypeText                    Term Length                 ${RelationshipData["Term_Length"]}
     ClickText                   Effective Date
     ClickText                   Today
     ClickText                   Payment Frequency
-    ClickText                   Monthly
+    ClickText                   ${RelationshipData["Payment_Frequency"]}
     ClickText                   Save
+     
+     
 
 
 
