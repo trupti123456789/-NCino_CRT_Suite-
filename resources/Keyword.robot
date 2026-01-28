@@ -1,12 +1,4 @@
 *** Settings ***
-Library                         QForce
-Library                         Collections
-Library                         RequestsLibrary
-Library                         JSONLibrary
-Library                         QVision
-Library                         QWeb
-Library                         ../CustomLIbrary/Selenium.py
-Library                         OperatingSystem
 Resource                        ../resources/common.robot
 Resource                        ../resources/data.robot
 Suite Setup                     Setup Browser
