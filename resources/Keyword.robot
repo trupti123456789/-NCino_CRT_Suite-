@@ -588,8 +588,19 @@ Rate and payment configuration
     ClickText                   Payment Frequency
     ClickText                   ${RelationshipData["Payment_Frequency"]}
     ClickText                   Save
-     
-     
+
+Approved Product package
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Product Package
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Run Keyword                 Wait
+    ClickText                   Approval History
+    ClickElement                xpath=//button[@data-toggle="dropdown"]
+    ClickText                   Approve/Reject
+    ClickElement                xpath=//a[@data-ncino-element-id="PICKLIST-APPROVE_/_REJECT"]
+    Run Keyword                 Wait
+    TypeText                    Comments                    Approving Product Package
+    ClickText                   Approve
 
 
 
