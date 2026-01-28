@@ -12,8 +12,8 @@ Suite Teardown              End Suite
 *** Keywords ***
 Data
 
-    # ${Json_obj}=            Evaluate                    open('${CURDIR}/../Data/Data.json').read()    json
-    # ${dataA}=               Evaluate                    json.loads('''${Json_obj}''')       json
+    # ${Json_obj}=          Evaluate                    open('${CURDIR}/../Data/Data.json').read()    json
+    # ${dataA}=             Evaluate                    json.loads('''${Json_obj}''')    json
     ${dataA}=               Load JSON From File         ${CURDIR}/../Data/Data.json
 
 
@@ -32,6 +32,7 @@ Data
     ${Product_Pac}=         Set Variable                ${dataA["Product Package"]}
     ${Doc_Man}=             Set Variable                ${dataA["Document Manager"]}
     ${Compliance}=          Set Variable                ${dataA["Compliance"]}
+    ${Structure}=           Set Variable                ${dataA["Amortization Structure"]}
 
 
     ${RelationshipData}=    Create Dictionary
@@ -116,6 +117,15 @@ Data
     ...                     Question5=${Compliance["If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an \"Employee Loan\"."]}
     ...                     Question6=${Compliance["I certify this loan has been marked as \"Reg O Reportable\"."]}
     ...                     HMDA_Record_Type=${Compliance["HMDA Record Type"]}
+
+    ...                     Term_Length=${Structure["Term Length"]}
+    ...                     All-in-Rate=${Structure["All-in Rate"]}
+    ...                     Term_Unit=${Structure["Term Unit"]}
+    ...                     Index=${Structure["Index"]}
+    ...                     Spread=${Structure["Spread"]}
+    ...                     Payment_Type=${Structure["Payment Type"]}
+    ...                     Term_Length=${Structure["Term Length"]}
+    ...                     Payment_Frequency=${Structure["Payment Frequency"]}
 
 
 
