@@ -113,7 +113,28 @@ Update Loan Information about Pricing Required fields and Rate and Payment Struc
     Run Keyword                 Wait
     ClickText                   Loan Structuring
     VerifyAll                   Loan Information from Details,Loan Calculated Fields
-    ClickText                   Continue
+    VerifyText                  Amortization Structure
+    ClickText                   Create Structure
+    UseModal                    ON
+    ClickText                   Effective Date
+    ClickText                   Today
+    TypeText                    Term Length                 ${RelationshipData["Term_Length"]}
+    TypeText                    All-in Rate                 ${RelationshipData["All-in-Rate"]}
+    ClickText                   Term Unit
+    ClickText                   ${RelationshipData["Term_Unit"]}
+    ClickText                   Variable
+    ClickText                   Index
+    ClickText                   ${RelationshipData["Index"]}
+    TypeText                    Spread                      ${RelationshipData["Spread"]}
+    ClickText                   Repayment Structure
+    ClickText                   Payment Type
+    ClickText                   ${RelationshipData["Payment_Type"]}
+    TypeText                    Term Length                 ${RelationshipData["Term_Length"]}
+    ClickText                   Effective Date
+    ClickText                   Today
+    ClickText                   Payment Frequency
+    ClickText                   ${RelationshipData["Payment_Frequency"]}
+    ClickText                   Save
 
 
 Create Household and Relationship Connections
@@ -233,6 +254,7 @@ Add Collateral with Collateral Ownership in Loan
     Run Keyword                 Wait
     ClickCheckbox               Select Item 1               on                          partial_match=False
     ClickText                   Continue
+    #url
 
 Add the Origination Fee
     [Arguments]                 ${RelationshipData}
@@ -249,6 +271,24 @@ Add the Origination Fee
     Run Keyword                 Wait
     ClickText                   Continue
 
+financials and other documents and upload to Relationship and loan    
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Relationships
+    ClickText                   ${Business_User_name}       partial_match=True
+    ${relative_path}            Set Variable                tests/../Data/relationships.png
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    ClickText                   Document Manager
+    Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
+    Upload File                 Upload Files                ${file_path}                anchor=Add Placeholder
+    RefreshPage
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}       partial_match=True
+    ClickText                   Document Manager
+    ${relative_path}            Set Variable                tests/../Data/loan.png
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
+    Upload File                 Upload Files                ${file_path}                anchor=Add Placeholder
+    RefreshPage
 Generate the Product Package Credit Memo and update Deal Summary and Relationship Narrative
     [Arguments]                 ${RelationshipData}
     Clicktext                   Product Package
@@ -269,7 +309,7 @@ Generate the Product Package Credit Memo and update Deal Summary and Relationshi
     ClickText                   Save
     Back
 
-Change the loan stege from Qualification to Proposal
+Change the loan stage from Qualification to Proposal
     [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
@@ -287,7 +327,8 @@ Generate Term Sheet via Generate Forms in the Loan Magic Wand
     Run Keyword                 Wait
     ${Dfile_path}=              Verify File Download        timeout=30
 
-Add Team Member in Loan   
+
+Add Loan assistant Team Member in Loan   
     [Arguments]                 ${RelationshipData}
     ClickText                   Loans
     ClickText                   ${Business_User_name}
@@ -306,7 +347,21 @@ Add Team Member in Loan
     ClickText                   Continue
     Run Keyword                 Wait
 
-Change the loan stege from Proposal to Credit Underwriting
+Update Credit Memo Relationship     
+Add additional Fees
+Upload documents to DocMan on the Collateral   
+    [Arguments]                 ${RelationshipData}
+    #url
+    ClickText                   Document Manager
+    ClickText                   Collateral Valuation
+    ${relative_path}            Set Variable                tests/../Data/Collateral.png
+    ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
+    Upload File                 Upload Files                ${file_path}                anchor=Portal Options
+    RefreshPage
+
+
+Change the loan stage from Proposal to Credit Underwriting
     [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
@@ -328,6 +383,27 @@ Verify and Review Household and Relationship Connection
     ClickText                   Relationships
     ClickText                   ${Individual_User_name}
     VerifyField                 Relationship Type           ${RelationshipData["Type2"]}
+
+Review Doc Man on the Loan and Borrower and Collateral   
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Relationships
+    Clicktext                   ${Business_User_name}       partial_match=True
+    ClickText                   Document Manager
+    ClickText                   Upload Files
+    QVision.ClickText           Cancel
+    VerifyText                  File Staging
+    VerifyText                  relationship.png
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    ClickText                   Document Manager
+    ClickText                   Upload Files
+    QVision.ClickText           Cancel
+    VerifyText                  File Staging
+    VerifyText                  loan.png
+    #url
+    ClickText                   Document Manager
+    ClickText                   Collateral Valuations
+    VerifyText                  Collateral.png
 
 Perform Spreads 
     [Arguments]                 ${RelationshipData}
@@ -372,6 +448,31 @@ Verify Covenant in loan
     VerifyAll                   Category,Covenant Type
     Verifytext                  ${RelationshipData["CategoryCov"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
+
+Compliance Questionnaires
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    ClickText                   ${Business_User_name}
+    Clicktext                   Compliance
+    Run Keyword                 Wait
+    Clicktext                   HMDA Eligibility
+    DropDown                    Is the loan or line of credit secured by a lien on a dwelling?                      ${RelationshipData["Question1"]}
+    DropDown                    Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)    ${RelationshipData["Question2"]}
+    DropDown                    I certify that this loan IS NOT HMDA Reportable.        ${RelationshipData["Question3"]}
+    ClickText                   Continue
+    DropDown                    Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?    ${RelationshipData["Question4"]}
+    DropDown                    If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan".    ${RelationshipData["Question5"]}
+    DropDown                    I certify this loan has been marked as "Reg O Reportable".                          ${RelationshipData["Question6"]}
+    ClickText                   Continue
+    ClickText                   Continue
+    ClickText                   Continue
+    sleep                       3
+    DropDown                    Is this loan HMDA reportable?                           ${RelationshipData["Question1"]}
+    ClickText                   Continue
+    ClickText                   Edit: HMDA Record Type
+    ClickText                   --None--                    anchor=HMDA Record Type
+    ClickText                   ${RelationshipData["HMDA_Record_Type"]}                 anchor=Skip to Navigation
+    ClickText                   Save
 
 On Product Package assign Approver and add Household Relationship
     [Arguments]                 ${RelationshipData}
@@ -418,17 +519,20 @@ Configure Document Manager
     Upload File                 Add File                    ${file_path}                anchor=Portal Options
     RefreshPage
 
-
-
-
-
-Change the loan stege from Credit Underwriting to 
+Change the loan stage from Credit Underwriting to Final Review
     [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Final Review
+
+Review Loan and associated Product Package
+    [Arguments]                 ${RelationshipData}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True          #Loan
+    VerifyElementText           //p[text()\='Relationship']/following-sibling::p//a     ${Business_User_name} #Relationship
+    VerifyElement               //a[contains(text(),'PP')]                              #Product package
 
 Dealing with Loan Facilities
 
@@ -452,14 +556,6 @@ Loan submit for Approval
     ClickText                   Back to Product Package
     VerifyText                  This Product Package is currently pending approval and locked for any edits
 
-Change the loan stege Final Review to Approval
-    [Arguments]                 ${RelationshipData}         ${stage}
-    ClickText                   Loans
-    Clicktext                   ${Business_User_name}       partial_match=True
-    Clicktext                   Mark Stage as Complete
-    sleep                       3
-    Verify LOS Stage Using VerifyElement                    Approval / Loan Committee
-
 Loan Approver by assign User   
     [Arguments]                 ${RelationshipData}
     LaunchApp                   Approval Requests
@@ -476,6 +572,13 @@ Loan Approver by assign User
     Run Keyword                 Wait
     ClickText                   Approve                     partial_match=False
 
+Change the loan stage Final Review to Approval
+    [Arguments]                 ${RelationshipData}         ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement                    Approval / Loan Committee
 
 
 Update the Origination Fee
@@ -540,14 +643,27 @@ Complete Review HMDA and CRA Reporting
     ClickText                   ${RelationshipData["HMDA_Record_Type"]}                 anchor=Skip to Navigation
     ClickText                   Save
 
-
-Change the loan stege from Approval to Processing
+Change the loan stage from Approval to Processing
     [Arguments]                 ${RelationshipData}         ${stage}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Processing
+     
+Approved Product package
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Product Package
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Run Keyword                 Wait
+    ClickText                   Approval History
+    ClickElement                xpath=//button[@data-toggle="dropdown"]
+    ClickText                   Approve/Reject
+    ClickElement                xpath=//a[@data-ncino-element-id="PICKLIST-APPROVE_/_REJECT"]
+    Run Keyword                 Wait
+    TypeText                    Comments                    Approving Product Package
+    ClickText                   Approve
+
 
 Document Manager Approval
 
@@ -563,44 +679,10 @@ Rate and payment configuration
     [Arguments]                 ${RelationshipData}
     ClickText                   Loans
     ClickText                   ${Business_User_name}       partial_match=True
-    ClickText                   Loan Information
-    ClickText                   Loan Structuring
-    Run Keyword                 Wait
-    VerifyText                  Amortization Structure
-    ClickText                   Create Structure
-    UseModal                    ON
-    ClickText                   Effective Date
-    ClickText                   Today
-    TypeText                    Term Length                 ${RelationshipData["Term_Length"]}
-    TypeText                    All-in Rate                 ${RelationshipData["All-in-Rate"]}
-    ClickText                   Term Unit
-    ClickText                   ${RelationshipData["Term_Unit"]}
-    ClickText                   Variable
-    ClickText                   Index
-    ClickText                   ${RelationshipData["Index"]}
-    TypeText                    Spread                      ${RelationshipData["Spread"]}
-    ClickText                   Repayment Structure
-    ClickText                   Payment Type
-    ClickText                   ${RelationshipData["Payment_Type"]}
-    TypeText                    Term Length                 ${RelationshipData["Term_Length"]}
-    ClickText                   Effective Date
-    ClickText                   Today
-    ClickText                   Payment Frequency
-    ClickText                   ${RelationshipData["Payment_Frequency"]}
-    ClickText                   Save
-
-Approved Product package
-    [Arguments]                 ${RelationshipData}
-    Clicktext                   Product Package
-    Clicktext                   ${Business_User_name}       partial_match=True
-    Run Keyword                 Wait
-    ClickText                   Approval History
-    ClickElement                xpath=//button[@data-toggle="dropdown"]
-    ClickText                   Approve/Reject
-    ClickElement                xpath=//a[@data-ncino-element-id="PICKLIST-APPROVE_/_REJECT"]
-    Run Keyword                 Wait
-    TypeText                    Comments                    Approving Product Package
-    ClickText                   Approve
+    ClickText                   Approved Details
+    Verifytext                  Rate & Payment Structure
+    VerifyAll                   Loan Amount ,Loan Term ,Amortized Term ,First Payment Date 
+    
 
 
 
