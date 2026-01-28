@@ -12,8 +12,6 @@ Resource                        ../resources/data.robot
 Suite Setup                     Setup Browser
 Suite Teardown                  End Suite
 
-
-
 *** Keywords ***
     ${RelationshipData}=        Data
 
