@@ -545,7 +545,7 @@ Document Manager Approval
     [Arguments]                 ${RelationshipData}   ${relative_path}     ${file_path}  
     Clicktext                   More Options
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
-    QWeb.Upload File            Add File                    ${file_path}                anchor=Portal Options
+    Upload File            Add File                    ${file_path}                anchor=Portal Options
 
 
 
