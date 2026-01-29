@@ -695,8 +695,37 @@ Change the loan stage from Doc Prep to Closing
 
 Configure the Loan Document
     [Arguments]                 ${RelationshipData}  
-    LaunchApp  
-    Home                
+    LaunchApp    Loan Documents
+    ClickText    New
+    UseModal    On
+    TypeText    *Name    Test Loan Doc
+    ComboBox    Search Loans...    _ Facebook 1769670933 - Term Loan - $7,600,000.00
+    ClickText    Select a date for Date    anchor=Approval Date
+    ClickText    Today
+    ComboBox    Search People...    Satish R
+    ClickText    Search Closing Checklists...
+    ClickText    New Closing Checklist
+    TypeText    *Name    TEst Closing Checklist    anchor=Name
+    ComboBox    Search DocManagers...    Account
+    PickList    Owner    Closer
+    PickList    Priority    Medium
+    PickList    Needed By Stage    Closing
+    ClickCheckbox    Attorney    on
+    ClickText    Save    anchor=Save & New
+    UseModal    Off
+    ClickText    Clear Closing Checklist Selection
+    ClickText    Search Closing Checklists...
+    ClickText    New Closing Checklist
+    UseModal    On
+    ClickText    Cancel    anchor=Save & New
+    ComboBox    Search Closing Checklists...    TEst Closing Checklist
+    PickList    Priority    Medium
+    PickList    -D Portal Doc Type    --None--
+    PickList    -D Portal Doc Type    R
+    PickList    Review Status    Approved
+    ClickText    Save    partial_match=False
+    UseModal    Off
+
 
 
 
