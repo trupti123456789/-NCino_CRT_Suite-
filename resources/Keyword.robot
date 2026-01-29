@@ -658,7 +658,6 @@ Approved Product package
 
 
 Document Manager Approval
-
     [Arguments]                 ${RelationshipData}         ${relative_path}            ${file_path}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
@@ -674,7 +673,9 @@ Rate and payment configuration
     ClickText                   Loans
     ClickText                   ${Business_User_name}       partial_match=True
     ClickText                   Approved Details
-    VerifyAll                   Payment Structure,Rate Structure
+    Verifytext                   Payment Structure
+    Verifytext                   Rate Structure
+    VerifyAll                   Sequence,Effective Date,Term Length,Term Unit
 
 
 
