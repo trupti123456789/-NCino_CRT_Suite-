@@ -667,6 +667,14 @@ Document Manager Approval
     ClickText                   Approved
     VerifyText                  Approved                    anchor=Status
     Run Keyword                 Wait
+    
+Change the loan stage from Processing to Doc Prep
+    [Arguments]                 ${RelationshipData}         ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement                    Doc Prep         
 
 Rate and payment configuration
     [Arguments]                 ${RelationshipData}
@@ -676,6 +684,19 @@ Rate and payment configuration
     Verifytext                   Payment Structure
     Verifytext                   Rate Structure
     VerifyAll                   Sequence,Effective Date,Term Length,Term Unit
+
+Change the loan stage from Doc Prep to Closing
+    [Arguments]                 ${RelationshipData}         ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement                    Closing    
+
+Configure the Loan Document
+    [Arguments]                 ${RelationshipData}  
+    LaunchApp  
+    Home                
 
 
 
