@@ -316,12 +316,13 @@ Generate the Product Package Credit Memo and update Deal Summary and Relationshi
     Back
 
 Change the loan stage from Qualification to Proposal
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}         
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Proposal
+    ${stage}=    Set Variable     Proposal
+    Verify LOS Stage Using VerifyElement                    ${stage}
 
 Generate Term Sheet via Generate Forms in the Loan Magic Wand
     [Arguments]                 ${RelationshipData}
@@ -367,12 +368,13 @@ Upload documents to DocMan on the Collateral
 
 
 Change the loan stage from Proposal to Credit Underwriting
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}         
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Credit Underwriting
+    ${stage}=    Set Variable     Credit Underwriting
+    Verify LOS Stage Using VerifyElement                    ${stage}
 
 Verify and Review Household and Relationship Connection
     [Arguments]                 ${RelationshipData}
@@ -538,12 +540,13 @@ Configure Document Manager
     RefreshPage
 
 Change the loan stage from Credit Underwriting to Final Review
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}       
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Final Review
+    
 
 Review Loan and associated Product Package
     [Arguments]                 ${RelationshipData}
@@ -579,7 +582,8 @@ Change the loan stage Final Review to Approval
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Approval / Loan Committee
+    ${stage}=    Set Variable     Approval / Loan Committee
+    Verify LOS Stage Using VerifyElement                    ${stage}
 Loan Approver by assign User   
     [Arguments]                 ${RelationshipData}
     LaunchApp                   Approval Requests
@@ -644,12 +648,13 @@ Complete Review HMDA and CRA Reporting
 
 
 Change the loan stage from Approval to Processing
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}         
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Processing
+    ${stage}=    Set Variable     Processing
+    Verify LOS Stage Using VerifyElement                    ${stage}
 
 Approved Product package
     [Arguments]                 ${RelationshipData}
@@ -677,12 +682,14 @@ Document Manager Approval
     Run Keyword                 Wait
 
 Change the loan stage from Processing to Doc Prep
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}       
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Doc Prep
+    ${stage}=    Set Variable     Doc Prep
+    Verify LOS Stage Using VerifyElement                    ${stage}     
+
 
 Rate and payment configuration
     [Arguments]                 ${RelationshipData}
@@ -714,20 +721,22 @@ Configure the Loan Document
     UseModal                    Off
 
 Change the loan stage from Doc Prep to Closing
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}        
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Closing
+    ${stage}=    Set Variable     Closing
+    Verify LOS Stage Using VerifyElement                    ${stage}
 
 Change the loan stage from Closing to Boarding
-    [Arguments]                 ${RelationshipData}         ${stage}
+    [Arguments]                 ${RelationshipData}         
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Boarding
+     ${stage}=    Set Variable      Boarding
+    Verify LOS Stage Using VerifyElement                    ${stage}
     
 Change the loan stage from Boarding to Booked
     [Arguments]                 ${RelationshipData}         ${stage}
@@ -735,7 +744,8 @@ Change the loan stage from Boarding to Booked
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Mark Stage as Complete
     sleep                       3
-    Verify LOS Stage Using VerifyElement                    Booked   
+    ${stage}=    Set Variable     Booked   
+    Verify LOS Stage Using VerifyElement                    ${stage}
 
 
 
