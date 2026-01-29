@@ -27,6 +27,7 @@ Data
     ${Compliance}=          Set Variable                ${dataA["Compliance"]}
     ${Structure}=           Set Variable                ${dataA["Amortization Structure"]}
     ${Loan_Doc}=            Set Variable                ${dataA["Loan Document"]}
+    ${Rel_DocMan}=          Set Variable                ${dataA["RelDocumentManager"]}
 
 
     ${RelationshipData}=    Create Dictionary
