@@ -272,8 +272,9 @@ financials and other documents and upload to Relationship and loan
     [Arguments]                 ${RelationshipData}
     ClickText                   Relationships
     ClickText                   ${Business_User_name}       partial_match=True
-    ${relative_path}            Set Variable                tests/../Data/relationships.png
+    ${relative_path}            Set Suite Variable              tests/../Data/relationships.png
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Set Suite Variable          ${file_path} 
     ClickText                   Document Manager
     Run Keyword                 Wait
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enableAction'; })
@@ -283,8 +284,9 @@ financials and other documents and upload to Relationship and loan
     ClickText                   Loans
     ClickText                   ${Business_User_name}       partial_match=True
     ClickText                   Document Manager
-    ${relative_path}            Set Variable                tests/../Data/loan.png
+    ${relative_path}            Set Suite Variable                tests/../Data/loan.png
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Set Suite Variable          ${file_path} 
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enableAction'; })
     Upload File                 Upload Files                ${file_path}
     RefreshPage
@@ -298,8 +300,9 @@ Generate the Product Package Credit Memo and update Deal Summary and Relationshi
     Verifytext                  Generate Form
     Clicktext                   Generate
     QVision.Clicktext           Save to Document Manager    delay=20
-    ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    ${relative_path}            Set Suite Variable                tests/../Data/PO.pdf
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Set Suite Variable          ${file_path} 
     VerifyText                  Save To Placeholder
     UploadFile                  Upload                      ${file_path}
     Run Keyword                 Wait
@@ -350,8 +353,9 @@ Upload documents to DocMan on the Collateral
     GoTo                        ${CollateralID}
     ClickText                   Document Manager
     ClickText                   Collateral Valuation
-    ${relative_path}            Set Variable                tests/../Data/Collateral.png
+    ${relative_path}            Set Suite Variable                  tests/../Data/Collateral.png
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Set Suite Variable           ${file_path} 
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
     Upload File                 Upload Files                ${file_path}                anchor=Portal Options
     RefreshPage
@@ -519,8 +523,9 @@ Configure Document Manager
     VerifyAll                   Name,Category,Year
     Verifytext                  ${RelationshipData["Document_Placeholder_Name"]}
     Verifytext                  ${RelationshipData["Category"]}
-    ${relative_path}            Set Variable                tests/../Data/PO.pdf
+    ${relative_path}            Set Suite variable                tests/../Data/PO.pdf
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
+    Set Suite Variable          ${file_path}
     Clicktext                   More Options
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
     Upload File                 Add File                    ${file_path}                anchor=Portal Options
@@ -610,8 +615,7 @@ Regenerate Credit Memo with approval details
     Verifytext                  Generate Form
     Clicktext                   Generate
     QVision.Clicktext           Save to Document Manager    delay=20
-    ${relative_path}            Set Variable                tests/../Data/PO.pdf
-    Set Suite Variable          ${relative_path}
+    ${relative_path}            Set Suite Variable              tests/../Data/PO.pdf
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
     Set Suite Variable          ${file_path}
     VerifyText                  Save To Placeholder
