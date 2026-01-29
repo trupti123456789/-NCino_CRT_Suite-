@@ -249,10 +249,14 @@ Add Collateral with Collateral Ownership in Loan
     Run Keyword                 Wait
     ClickText                   Save Pledged Collateral
     Run Keyword                 Wait
-    ClickCheckbox               Select Item 1               on                          partial_match=False
-    ClickText                   Continue
+    ClickText                   COL                        partial_match=True
     ${CollateralID}             GetUrl
     Set Suite Variable          ${CollateralID}
+    SwitchWindow                1
+    ClickText                   Collateral
+    Clicktext                   ${Business_User_name}
+    #ClickCheckbox               Select Item 1               on                          partial_match=False
+    ClickText                   Continue
 
 Add the Origination Fee
     [Arguments]                 ${RelationshipData}
