@@ -685,13 +685,6 @@ Rate and payment configuration
     Verifytext                  Rate Structure
     VerifyAll                   Sequence,Effective Date,Term Length,Term Unit
 
-Change the loan stage from Doc Prep to Closing
-    [Arguments]                 ${RelationshipData}         ${stage}
-    ClickText                   Loans
-    Clicktext                   ${Business_User_name}       partial_match=True
-    Clicktext                   Mark Stage as Complete
-    sleep                       3
-    Verify LOS Stage Using VerifyElement                    Closing
 
 Configure the Loan Document
     [Arguments]                 ${RelationshipData}
@@ -720,7 +713,13 @@ Configure the Loan Document
     ClickText                   Save                        partial_match=False
     UseModal                    Off
 
-
+Change the loan stage from Doc Prep to Closing
+    [Arguments]                 ${RelationshipData}         ${stage}
+    ClickText                   Loans
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Clicktext                   Mark Stage as Complete
+    sleep                       3
+    Verify LOS Stage Using VerifyElement                    Closing
 
 
 
