@@ -674,8 +674,7 @@ Rate and payment configuration
     ClickText                   Loans
     ClickText                   ${Business_User_name}       partial_match=True
     ClickText                   Approved Details
-    Verifytext                  Rate & Payment Structure
-    VerifyAll                   Loan Amount ,Loan Term ,Amortized Term ,First Payment Date
+    VerifyAll                   Payment Structure,Rate Structure
 
 
 
