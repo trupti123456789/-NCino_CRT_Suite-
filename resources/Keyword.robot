@@ -55,7 +55,8 @@ Create a new Loan for nCino application method and verify LOS Stage
     TypeText                    Loan Purpose                ${RelationshipData["Loan_Purpose"]}
     ClickText                   Create New Loan
     Run Keyword                 Wait
-    Verify LOS Stage Using VerifyElement                    Qualification
+    ${stage}=    Set Variable    Qualification
+    Verify LOS Stage Using VerifyElement                    ${stage}
 
 Configure the Product Package Details and Assign Loan Officer to Loan Team
     [Arguments]                 ${RelationshipData}
