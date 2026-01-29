@@ -283,8 +283,22 @@ financials and other documents and upload to Relationship and loan
     Set Suite Variable          ${file_path} 
     ClickText                   Document Manager
     Run Keyword                 Wait
+    Clicktext                   Add Placeholder             delay=5
+    Usemodal                    on
+    ClickElement                xpath=//input[@id="docTypeInputField"]
+    ClickText                   ${RelationshipData["RelationCategory"]}
+    ClickElement                xpath=//input[@id="nameInputField"]
+    ClickText                   ${RelationshipData["Placeholder_Name"]}
+    Typetext                    Year                        ${RelationshipData["RelYear"]}
+    Clicktext                   Save                        anchor=Cancel
+    Usemodal                    Off
+    Sleep                       5
+    Clicktext                   ${RelationshipData["Document_Placeholder_Name"]}        anchor=Open
+    VerifyAll                   Name,Category,Year
+    Verifytext                  ${RelationshipData["Document_Placeholder_Name"]}
+    Verifytext                  ${RelationshipData["Category"]}
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enableAction'; })
-    Upload File                 Upload Files                ${file_path}                anchor=Add Placeholder
+    Upload File                 browse               ${file_path}                
     Sleep                       5
     RefreshPage
     ClickText                   Loans
