@@ -122,8 +122,8 @@
       "Review Status":"Approved"
     },
     "RelDocumentManager":{
-      "Relationship Category":"Approval Documents",
-      "Placeholder Name":"Credit Memo",
+      "Relationship Category":"Business Documentation",
+      "Placeholder Name":"Tax ID",
       "Rel Year":2026
     }
 }
