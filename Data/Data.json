@@ -113,7 +113,7 @@
       "Payment Frequency":"Monthly"
     },
     "Loan Document":{
-      "LoneName":"Test Loan Doc",
+      "LoanName":"Test Loan Doc",
       "ClosingChecklistName":"TEst Closing Checklist",
       "Owner":"Closer",
       "Priority":"Medium",
