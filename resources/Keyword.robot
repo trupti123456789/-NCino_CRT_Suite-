@@ -42,7 +42,7 @@ Create a Product package for Business Account
     ClickText                   Save
 
 Create a new Loan for nCino application method and verify LOS Stage
-    [Arguments]                 ${RelationshipData} ${stage}
+    [Arguments]                 ${RelationshipData} 
     ClickText                   Loan Facilities
     ClickText                   Magic Wand: Tools and Actions
     ClickText                   New Facility
