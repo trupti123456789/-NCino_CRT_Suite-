@@ -692,24 +692,16 @@ Configure the Loan Document
     ClickText                   New
     UseModal                    On
     TypeText                    *Name                       ${RelationshipData["LoanName"]}
-    ComboBox                    Search Loans...             ${Business_User_name}      partial_match=True
+    ComboBox                    Search Loans...             ${Business_User_name}       partial_match=True
     ClickText                   Select a date for Date      anchor=Approval Date
     ClickText                   Today
     ComboBox                    Search People...            ${RelationshipData["User"]}
-    ClickText                   Search Closing Checklists...
-    TypeText                    *Name                       ${RelationshipData["ClosingChecklistName"]}             anchor=Name
-    ComboBox                    Search DocManagers...       Account
-    PickList                    Owner                       ${RelationshipData["Owner"]}
-    PickList                    Priority                    ${RelationshipData["Priority"]}
-    PickList                    Needed By Stage             ${RelationshipData["Needed_By_Stage"]}
-    ClickCheckbox               Attorney                    on
-    ClickText                   Save                        anchor=Save & New
-    UseModal                    Off
     ComboBox                    Search Closing Checklists...                            ${RelationshipData["ClosingChecklistName"]}
-    PickList                    Priority                    Medium
+    ComboBox                    Search DocManagers...       Account
+    PickList                    Priority                    ${RelationshipData["Priority"]}
     PickList                    -D Portal Doc Type          --None--
-    PickList                    -D Portal Doc Type          ${RelationshipData["-D_Portal_Doc_Typ"]}
-    PickList                    Review Status               ${RelationshipData["Review_StatuS"]}
+    PickList                    -D Portal Doc Type          ${RelationshipData["-D_Portal_Doc_Type"]}
+    PickList                    Review Status               ${RelationshipData["Review_Status"]}
     ClickText                   Save                        partial_match=False
     UseModal                    Off
 
