@@ -44,8 +44,7 @@ E2E Positive flow
     Review Loan and associated Product Package              ${RelationshipData}
     Dealing with Loan Facilities                            ${RelationshipData}
     Loan submit for Approval    ${RelationshipData}
-    Loan Approver by assign User                            ${RelationshipData}
-    Change the loan stage Final Review to Approval          ${RelationshipData}                
+    Loan Approver by assign User                            ${RelationshipData}               
     # LOS Stage – Processing
     Update the Origination Fee                              ${RelationshipData}
     Regenerate Credit Memo with approval details            ${RelationshipData}
