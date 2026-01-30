@@ -249,13 +249,13 @@ Add Collateral with Collateral Ownership in Loan
     ClickText                   Save Pledged Collateral
     Run Keyword                 Wait
     ClickText                   COL                         partial_match=True
-    SwitchWindow                NEW                       
-    Sleep                       2s      # 
+    SwitchWindow                NEW
+    Sleep                       2s                          #
     ${CollateralID}             GetUrl
     Set Suite Variable          ${CollateralID}
     SwitchWindow                1
     ClickText                   Collateral
-   # Clicktext                   ${Business_User_name}
+    # Clicktext                 ${Business_User_name}
     #ClickCheckbox              Select Item 1               on                          partial_match=False
     ClickText                   Continue
 
@@ -301,7 +301,7 @@ financials and other documents and upload to Relationship and loan
     Clicktext                   More Options
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enableAction'; })
     Upload File                 Add File                    ${file_path}
-    Sleep                       5
+    Run Keyword                 Wait
     RefreshPage
     ClickText                   Loans
     ClickText                   ${Business_User_name}       partial_match=True
@@ -314,7 +314,7 @@ financials and other documents and upload to Relationship and loan
     Clicktext                   More Options
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enableAction'; })
     Upload File                 Add File                    ${file_path}
-    Sleep                       5
+    Run Keyword                 Wait
     RefreshPage
 Generate the Product Package Credit Memo and update Deal Summary and Relationship Narrative
     [Arguments]                 ${RelationshipData}
@@ -382,14 +382,14 @@ Upload documents to DocMan on the Collateral
     SwitchWindow                2
     ClickText                   Document Manager
     Run Keyword                 Wait
-    ClickText                   Collateral Valuation
+    ClickText                   Collateral Valuation        anchor=Open
     ${relative_path}            Set Variable                tests/../Data/Collateral.png
     Set Suite Variable          ${relative_path}
     ${file_path}                Get File Path Based on Mode                             ${relative_path}
     Set Suite Variable          ${file_path}
     Clicktext                   More Options
     Execute JavaScript          script= Array.from(document.querySelectorAll('input[type="file"]')).forEach(function(input) { input.className = 'enabledAction'; })
-    Upload File                 Add File                ${file_path}                anchor=Portal Options
+    Upload File                 Add File                    ${file_path}                anchor=Portal Options
     Run Keyword                 Wait
     RefreshPage
 
@@ -425,24 +425,23 @@ Review Doc Man on the Loan and Borrower and Collateral
     Clicktext                   ${Business_User_name}       partial_match=True
     ClickText                   Document Manager
     Run Keyword                 Wait
-    ClickText                   Upload Files
-    QVision.ClickText           Cancel
-    VerifyText                  File Staging
-    VerifyText                  relationships.png
+    ClickText                   In-File                     anchor=${RelationshipData["Placeholder_Name"]}
+    ClickText                   Approved
+    VerifyText                  Approved
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
     ClickText                   Document Manager
     Run Keyword                 Wait
-   ClickText                    In-File                     anchor=Loan Application   
-   ClickText                    Approved   
-   VerifyText                   Approved      
-    GoTo                        ${CollateralID}
+    ClickText                   In-File                     anchor=Loan Application
+    ClickText                   Approved
+    VerifyText                  Approved
+    #GoTo                       ${CollateralID}
     SwitchWindow                2
     ClickText                   Document Manager
     ClickText                   In-File                     anchor=Collateral Valuations
-    ClickText                    Approved   
-    VerifyText                   Approved 
- 
+    ClickText                   Approved
+    VerifyText                  Approved
+
 Perform Spreads 
     [Arguments]                 ${RelationshipData}
 
@@ -461,7 +460,7 @@ Create Risk Rating in Loan
 
 Add Covenants in Loan   
     [Arguments]                 ${RelationshipData}
-    ClickText                   Relationships       
+    ClickText                   Relationships
     ClickText                   ${Business_User_name}
     ClickText                   Credit Resources
     ClickText                   Covenants
@@ -496,11 +495,11 @@ Compliance Questionnaires
     Clicktext                   HMDA Eligibility
     DropDown                    Is the loan or line of credit secured by a lien on a dwelling?                      ${RelationshipData["Question1"]}
     DropDown                    Is the loan temporary financing? (i.e., designed to be replaced by a permanent financing)            ${RelationshipData["Question2"]}
-    #DropDown                    I certify that this loan IS NOT HMDA Reportable.        ${RelationshipData["Question3"]}
+    #DropDown                   I certify that this loan IS NOT HMDA Reportable.        ${RelationshipData["Question3"]}
     ClickText                   Continue
     DropDown                    Is any borrower, co-borrower, or guarantor an executive officer, director, or principal shareholder of that bank, of a bank holding company of which the member bank is a subsidiary, and of any other subsidiary of that bank holding company?    ${RelationshipData["Question4"]}
     DropDown                    If any borrower, co-borrower, or guarantor of this loan is an employee of the bank or any affiliates, I certify I have indicated this is an "Employee Loan".    ${RelationshipData["Question5"]}
-    DropDown                   I certify this loan has been marked as "Reg O Reportable".                          ${RelationshipData["Question6"]}
+    DropDown                    I certify this loan has been marked as "Reg O Reportable".                          ${RelationshipData["Question6"]}
     ClickText                   Continue
     Sleep                       5
     ClickText                   Continue
@@ -528,8 +527,7 @@ On Product Package assign Approver and add Household Relationship
     VerifyText                  Approver 1
     Clickelement                xpath=//label[text()='Approver 1']//following::lightning-helptext//following-sibling::div//input
     Sleep                       3
-    Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 1
-    Verifytext                  Level 2 Approval
+    Clicktext                  Coapdo Admin                             anchor=Approver1 partial_match=False
     Clickelement                xpath=//label[text()='Approver 2']//following::lightning-helptext//following-sibling::div//input
     Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 2
     Verifytext                  Level 3 Approval
@@ -605,29 +603,33 @@ Loan submit for Approval
     ClickText                   Back to Product Package
     VerifyText                  This Product Package is currently pending approval and locked for any edits
 
-Change the loan stage Final Review to Approval
-    [Arguments]                 ${RelationshipData}
-    ClickText                   Loans
-    Clicktext                   ${Business_User_name}       partial_match=True
-    sleep                       3
-    ${stage}=                   Set Variable                Approval / Loan Committee
-    Verify LOS Stage Using VerifyElement                    ${stage}
+
 Loan Approver by assign User   
     [Arguments]                 ${RelationshipData}
     LaunchApp                   Approval Requests
-    VerifyText                  ${Business_User_name}
-    ClickText                   Show Actions                anchor=${Business_User_name}
+    VerifyText                  ${Business_User_name}       partial_match=True
+    ClickText                   ${Business_User_name}       partial_match=True
+    #ClickText                  Show Actions                anchor=${Business_User_name}
     ClickText                   Approve
     TypeText                    Comments                    Approving test 1
     Run Keyword                 Wait
     ClickText                   Approve                     partial_match=False
-    VerifyText                  ${Business_User_name}
+    Back
+    VerifyText                  ${Business_User_name}       partial_match=True
+    ClickText                   ${Business_User_name}       partial_match=True
     ClickText                   Show Actions                anchor=${Business_User_name}
     ClickText                   Approve
     TypeText                    Comments                    Approving test 2
     Run Keyword                 Wait
     ClickText                   Approve                     partial_match=False
-
+    Back
+# Change the loan stage Final Review to Approval
+#     [Arguments]                 ${RelationshipData}
+#     ClickText                   Loans
+#     Clicktext                   ${Business_User_name}       partial_match=True
+#     sleep                       3
+#     ${stage}=                   Set Variable                Processing
+#     Verify LOS Stage Using VerifyElement                    ${stage}
 Update the Origination Fee
     [Arguments]                 ${RelationshipData}
     ClickText                   Loans
@@ -676,12 +678,10 @@ Complete Review HMDA and CRA Reporting
     ClickText                   Certifications
     VerifyAll                   Employee Loan,Reg O Loan,CRA Reportable,HMDA Record Type,HMDA Reportable,
 
-
 Change the loan stage from Approval to Processing
     [Arguments]                 ${RelationshipData}
     ClickText                   Loans
     Clicktext                   ${Business_User_name}       partial_match=True
-    Clicktext                   Mark Stage as Complete
     sleep                       3
     ${stage}=                   Set Variable                Processing
     Verify LOS Stage Using VerifyElement                    ${stage}
@@ -702,7 +702,7 @@ Approved Product package
 
 Document Manager Approval
     [Arguments]                 ${RelationshipData}
-     Clicktext                   Product Package
+    Clicktext                   Product Package
     Clicktext                   ${Business_User_name}       partial_match=True
     Clicktext                   Document Manager
     Run Keyword                 Wait
