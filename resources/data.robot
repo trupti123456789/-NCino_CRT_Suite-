@@ -130,7 +130,7 @@ Data
     ...                     -D_Portal_Doc_Type=${Loan_Doc["-D Portal Doc Type"]}
     ...                     Review_Status=${Loan_Doc["Review Status"]}
 
-    ...                     Relation_Category=${Rel_DocMan["Relation Category"]}
+    ...                     Relation_Category=${Rel_DocMan["Relationship Category"]}
     ...                     Placeholder_Name=${Rel_DocMan["Placeholder Name"]}
     ...                     Rel_Year=${Rel_DocMan["Rel Year"]}
 
