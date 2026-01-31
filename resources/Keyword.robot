@@ -27,6 +27,7 @@ Adding Business Relationship for Customer Onboarding
     TypeText                    Relationship Name           ${Business_User_name}
     Picklist                    Type                        ${RelationshipData["Type1"]}
     ClickText                   Save                        partial_match=False
+    Run Keyword                 Wait
 
 Create a Product package for Business Account
     [Arguments]                 ${RelationshipData}
@@ -40,6 +41,7 @@ Create a Product package for Business Account
     ClickText                   Edit: Description
     TypeText                    Description                 Test
     ClickText                   Save
+    Run Keyword                 Wait
 
 Create a new Loan for nCino application method and verify LOS Stage
     [Arguments]                 ${RelationshipData}
@@ -57,6 +59,7 @@ Create a new Loan for nCino application method and verify LOS Stage
     Run Keyword                 Wait
     ${stage}=                   Set Variable                Qualification
     Verify LOS Stage Using VerifyElement                    ${stage}
+    Run Keyword                 Wait
 
 Configure the Product Package Details and Assign Loan Officer to Loan Team
     [Arguments]                 ${RelationshipData}
@@ -205,6 +208,8 @@ Verify the Exposer and create the debts
     ClickText                   Recalculate Exposure
     Sleep                       20
     VerifyText                  Total Exposure Summary
+    Run Keyword                 Wait
+
 
 Add Entity Involvement by adding CoBorrowers Guarantors to the Borrowing Structure and add Authorized Signers  
     [Arguments]                 ${RelationshipData}
@@ -227,6 +232,8 @@ Add Entity Involvement by adding CoBorrowers Guarantors to the Borrowing Structu
     ClickText                   Save Entity Involvement
     Run Keyword                 Wait
     ClickText                   Continue
+    Run Keyword                 Wait
+
 
 Add Collateral with Collateral Ownership in Loan
     [Arguments]                 ${RelationshipData}
@@ -258,6 +265,8 @@ Add Collateral with Collateral Ownership in Loan
     # Clicktext                 ${Business_User_name}
     #ClickCheckbox              Select Item 1               on                          partial_match=False
     ClickText                   Continue
+    Run Keyword                 Wait
+
 
 Add the Origination Fee
     [Arguments]                 ${RelationshipData}
@@ -273,6 +282,8 @@ Add the Origination Fee
     ClickText                   Save
     Run Keyword                 Wait
     ClickText                   Continue
+    Run Keyword                 Wait
+
 
 financials and other documents and upload to Relationship and loan    
     [Arguments]                 ${RelationshipData}
@@ -348,6 +359,8 @@ Change the loan stage from Qualification to Proposal
     sleep                       3
     ${stage}=                   Set Variable                Proposal
     Verify LOS Stage Using VerifyElement                    ${stage}
+     Run Keyword                 Wait
+
 
 Generate Term Sheet via Generate Forms in the Loan Magic Wand
     [Arguments]                 ${RelationshipData}
@@ -419,6 +432,7 @@ Verify and Review Household and Relationship Connection
     ClickText                   Relationships
     ClickText                   ${Individual_User_name}
     VerifyField                 Relationship Type           ${RelationshipData["Type2"]}
+    Run Keyword                 Wait
 
 Review Doc Man on the Loan and Borrower and Collateral   
     [Arguments]                 ${RelationshipData}         ${CollateralID}
@@ -442,6 +456,8 @@ Review Doc Man on the Loan and Borrower and Collateral
     ClickText                   In-File                     anchor=Collateral Valuations
     ClickText                   Approved
     VerifyText                  Approved
+    Run Keyword                 Wait
+
 
 Perform Spreads 
     [Arguments]                 ${RelationshipData}
@@ -486,6 +502,8 @@ Verify Covenant in loan
     VerifyAll                   Category,Covenant Type
     Verifytext                  ${RelationshipData["CategoryCov"]}
     Verifytext                  ${RelationshipData["Covenant_Type"]}                    anchor=Category
+    Run Keyword                 Wait
+
 
 Compliance Questionnaires
     [Arguments]                 ${RelationshipData}
@@ -515,6 +533,8 @@ Compliance Questionnaires
     ClickText                   --None--                    anchor=HMDA Record Type
     ClickText                   ${RelationshipData["HMDA_Record_Type"]}                 anchor=Skip to Navigation
     ClickText                   Save
+    Run Keyword                 Wait
+
 
 On Product Package assign Approver and add Household Relationship
     [Arguments]                 ${RelationshipData}
@@ -573,6 +593,8 @@ Change the loan stage from Credit Underwriting to Final Review
     Clicktext                   Mark Stage as Complete
     sleep                       3
     Verify LOS Stage Using VerifyElement                    Final Review
+    Run Keyword                 Wait
+
 
 
 Review Loan and associated Product Package
@@ -581,6 +603,8 @@ Review Loan and associated Product Package
     Clicktext                   ${Business_User_name}       partial_match=True          #Loan
     VerifyElementText           //p[text()\='Relationship']/following::p[1]             ${Business_User_name}       partial_match=True    #Relationship
     VerifyElement               //a[contains(text(),'PP')]                              #Product package
+    Run Keyword                 Wait
+
 
 Dealing with Loan Facilities
 
@@ -595,6 +619,8 @@ Dealing with Loan Facilities
     Clicktext                   Save
     Refreshpage
     VerifyElementText           //p[text()\='Number of Reviewable Loan Facilities']/following::lightning-formatted-number[1]         1
+    Run Keyword                 Wait
+
 
 Loan submit for Approval
     [Arguments]                 ${RelationshipData}
@@ -603,6 +629,8 @@ Loan submit for Approval
     VerifyText                  Product Package Approval Process
     ClickText                   Back to Product Package
     VerifyText                  This Product Package is currently pending approval and locked for any edits
+    Run Keyword                 Wait
+
 
 
 Loan Approver by assign User   
@@ -624,6 +652,8 @@ Loan Approver by assign User
     Run Keyword                 Wait
     ClickText                   Approve                     partial_match=False
     Back
+    Run Keyword                 Wait
+
 # Change the loan stage Final Review to Approval
 #     [Arguments]                 ${RelationshipData}
 #     ClickText                   Loans
@@ -677,7 +707,9 @@ Complete Review HMDA and CRA Reporting
     Clicktext                   Compliance
     Run Keyword                 Wait
     ClickText                   Certifications
-    VerifyAll                   Employee Loan,Reg O Loan,CRA Reportable,HMDA Record Type,HMDA Reportable,
+    VerifyAll                   Employee Loan,Reg O Loan,CRA Reportable,HMDA Record Type,HMDA Reportable
+    Run Keyword                 Wait
+
 
 Change the loan stage from Approval to Processing
     [Arguments]                 ${RelationshipData}
@@ -686,6 +718,8 @@ Change the loan stage from Approval to Processing
     sleep                       3
     ${stage}=                   Set Variable                Processing
     Verify LOS Stage Using VerifyElement                    ${stage}
+    Run Keyword                 Wait
+
 
 Approved Product package
     [Arguments]                 ${RelationshipData}
@@ -720,6 +754,8 @@ Change the loan stage from Processing to Doc Prep
     sleep                       3
     ${stage}=                   Set Variable                Doc Prep
     Verify LOS Stage Using VerifyElement                    ${stage}
+    Run Keyword                 Wait
+
 
 
 Rate and payment configuration
@@ -730,6 +766,8 @@ Rate and payment configuration
     Verifytext                  Payment Structure
     Verifytext                  Rate Structure
     VerifyAll                   Sequence,Effective Date,Term Length,Term Unit
+    Run Keyword                 Wait
+
 
 
 Configure the Loan Document
@@ -750,6 +788,8 @@ Configure the Loan Document
     PickList                    Review Status               ${RelationshipData["Review_Status"]}
     ClickText                   Save                        partial_match=False
     UseModal                    Off
+    Run Keyword                 Wait
+
 
 Change the loan stage from Doc Prep to Closing
     [Arguments]                 ${RelationshipData}
@@ -759,6 +799,8 @@ Change the loan stage from Doc Prep to Closing
     sleep                       3
     ${stage}=                   Set Variable                Closing
     Verify LOS Stage Using VerifyElement                    ${stage}
+    Run Keyword                 Wait
+
 
 Change the loan stage from Closing to Boarding
     [Arguments]                 ${RelationshipData}
@@ -768,6 +810,8 @@ Change the loan stage from Closing to Boarding
     sleep                       3
     ${stage}=                   Set Variable                Boarding
     Verify LOS Stage Using VerifyElement                    ${stage}
+    Run Keyword                 Wait
+
 
 Change the loan stage from Boarding to Booked
     [Arguments]                 ${RelationshipData}
@@ -777,6 +821,8 @@ Change the loan stage from Boarding to Booked
     sleep                       3
     ${stage}=                   Set Variable                Booked
     Verify LOS Stage Using VerifyElement                    ${stage}
+    Run Keyword                 Wait
+
 
 
 
