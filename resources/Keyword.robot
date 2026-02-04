@@ -538,7 +538,7 @@ Compliance Questionnaires
 
 On Product Package assign Approver and add Household Relationship
     [Arguments]                 ${RelationshipData}
-    Home
+    
     Clicktext                   Product Package
     Clicktext                   ${Business_User_name}       partial_match=True
     VerifyText                  Items required to submit for approval:
