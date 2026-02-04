@@ -634,6 +634,18 @@ Loan submit for Approval
     VerifyText                  This Product Package is currently pending approval and locked for any edits
     Run Keyword                 Wait
 
+Approved Product package
+    [Arguments]                 ${RelationshipData}
+    Clicktext                   Product Package
+    Clicktext                   ${Business_User_name}       partial_match=True
+    Run Keyword                 Wait
+    ClickText                   Approval History
+    ClickElement                xpath=//button[@data-toggle="dropdown"]
+    ClickElement                xpath=//a[@data-ncino-element-id="PICKLIST-APPROVE_/_REJECT"]
+    Run Keyword                 Wait
+    TypeText                    Comments                    Approving Product Package
+    ClickText                   Approve
+    Run Keyword                 Wait
 
 
 Loan Approver by assign User   
@@ -721,20 +733,6 @@ Change the loan stage from Approval to Processing
     sleep                       3
     ${stage}=                   Set Variable                Processing
     Verify LOS Stage Using VerifyElement                    ${stage}
-    Run Keyword                 Wait
-
-
-Approved Product package
-    [Arguments]                 ${RelationshipData}
-    Clicktext                   Product Package
-    Clicktext                   ${Business_User_name}       partial_match=True
-    Run Keyword                 Wait
-    ClickText                   Approval History
-    ClickElement                xpath=//button[@data-toggle="dropdown"]
-    ClickElement                xpath=//a[@data-ncino-element-id="PICKLIST-APPROVE_/_REJECT"]
-    Run Keyword                 Wait
-    TypeText                    Comments                    Approving Product Package
-    ClickText                   Approve
     Run Keyword                 Wait
 
 
