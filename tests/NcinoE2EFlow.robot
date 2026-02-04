@@ -43,7 +43,8 @@ E2E Positive flow
     # LOS Stage – Approval
     Review Loan and associated Product Package              ${RelationshipData}
     Dealing with Loan Facilities                            ${RelationshipData}
-    Loan submit for Approval    ${RelationshipData}
+    Loan submit for Approval                            ${RelationshipData}
+    Approved Product package                            ${RelationshipData}
     Loan Approver by assign User                            ${RelationshipData}               
     # LOS Stage – Processing
     Update the Origination Fee                              ${RelationshipData}
@@ -51,7 +52,6 @@ E2E Positive flow
     Complete Review HMDA and CRA Reporting                  ${RelationshipData}
     Change the loan stage from Approval to Processing       ${RelationshipData}                
     # LOS Stage – Doc Prep
-    Approved Product package    ${RelationshipData}
     Document Manager Approval                               ${RelationshipData}               
     Change the loan stage from Processing to Doc Prep       ${RelationshipData}                 
     # LOS Stage – Closing
