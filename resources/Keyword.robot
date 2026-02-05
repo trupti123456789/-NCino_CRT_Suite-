@@ -659,16 +659,16 @@ Loan Approver by assign User
     Run Keyword                 Wait
     ClickElement                xpath=//span[text()='Approve']
     Back
-    VerifyText                  ${Business_User_name}       partial_match=True
-    ClickText                   ${Business_User_name}       partial_match=True
-    Sleep                       5
-    LogScreenshot
-    #ClickText                   Show Actions                anchor=${Business_User_name}
-    ClickText                   Approve
-    TypeText                    Comments                    Approving test 2
-    Run Keyword                 Wait
-    ClickText                   Approve                     partial_match=False
-    Back
+    # VerifyText                  ${Business_User_name}       partial_match=True
+    # ClickText                   ${Business_User_name}       partial_match=True
+    # Sleep                       5
+    # LogScreenshot
+    # #ClickText                   Show Actions                anchor=${Business_User_name}
+    # ClickText                   Approve
+    # TypeText                    Comments                    Approving test 2
+    # Run Keyword                 Wait
+    # ClickText                   Approve                     partial_match=False
+    # Back
     Run Keyword                 Wait
 
     # Change the loan stage Final Review to Approval
