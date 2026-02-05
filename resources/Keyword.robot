@@ -653,6 +653,8 @@ Loan Approver by assign User
     LaunchApp                   Approval Requests
     VerifyText                  ${Business_User_name}       partial_match=True
     ClickText                   ${Business_User_name}       partial_match=True
+    Sleep                       5
+    LogScreenshot
     #ClickText                  Show Actions                anchor=${Business_User_name}
     ClickText                   Approve
     TypeText                    Comments                    Approving test 1
@@ -661,7 +663,9 @@ Loan Approver by assign User
     Back
     VerifyText                  ${Business_User_name}       partial_match=True
     ClickText                   ${Business_User_name}       partial_match=True
-    ClickText                   Show Actions                anchor=${Business_User_name}
+    Sleep                       5
+    LogScreenshot
+    #ClickText                   Show Actions                anchor=${Business_User_name}
     ClickText                   Approve
     TypeText                    Comments                    Approving test 2
     Run Keyword                 Wait
