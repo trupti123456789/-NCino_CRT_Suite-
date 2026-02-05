@@ -657,7 +657,7 @@ Loan Approver by assign User
     ClickText                   Approve
     TypeText                    Comments                    Approving test 1
     Run Keyword                 Wait
-    ClickText                   Approve                     partial_match=False
+    ClickElement                xpath=//span[text()='Approve']
     Back
     VerifyText                  ${Business_User_name}       partial_match=True
     ClickText                   ${Business_User_name}       partial_match=True
