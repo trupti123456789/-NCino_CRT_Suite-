@@ -550,9 +550,7 @@ On Product Package assign Approver and add Household Relationship
     Verifytext                  Level 1 Approval
     ClickElement                  xpath=//div[@data-selection="${RelationshipData['User']}"]
     Sleep                       3
-    #Clickelement                xpath=//label[text()='Approver 2']//following::lightning-helptext//following-sibling::div//input
     Verifytext                  Level 2 Approval
-    #Clicktext                   ${RelationshipData["User"]}                             anchor=Approver 2    partial_match=False
     Sleep                       3
     Clickelement                xpath=//label[text()='Approval Committee']//parent::span//following-sibling::div/lightning-base-combobox//button
     Clicktext                   ${RelationshipData["Approval_Committee"]}               anchor=Approver 3
