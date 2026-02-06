@@ -318,6 +318,7 @@ Financials and other documents and upload to Relationship and loan
     ClickText                   Loans
     ClickText                   ${Business_User_name}       partial_match=True
     ClickText                   Document Manager
+    Sleep                       3
     Clicktext                   Loan Application
     ${relative_path}            Set Variable                tests/../Data/loan.png
     Set Suite Variable          ${relative_path}
@@ -643,6 +644,9 @@ Approved Product package
     Run Keyword                 Wait
     TypeText                    Comments                    Approving Product Package
     ClickElement                xpath=//input[@value="Approve"]
+    #Execute JavaScript    script=document.querySelector("input[data-ncino-element-id='BUTTON-APPROVE']").click();
+    Execute JavaScript
+    ...    script=document.querySelector('input[data-ncino-element-id="BUTTON-APPROVE"]').click();
     Run Keyword                 Wait
 
 
